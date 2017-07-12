@@ -1,4 +1,4 @@
-# external_data_downloads
+# Data Downloads
 A repository to store scripts and configuration files used to download external datasets 
 
 ## Overview:
