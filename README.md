@@ -25,3 +25,22 @@ By default the program will set this to LOCAL_DIR =$REMOTE_SITE$REMOTE_DIR if th
 
 WGET_OPTIONS - wget command line options to use (example: WGET_OPTIONS="-S -t 10 -nd -m")
 ```
+
+## Usage
+
+```bash 
+
+ssh to server host
+cd /path2/external_data_downloads/
+run ./download_package package.config (where package.config is the configuration file of the package to download)
+Example 1: To download Ensembl CDNA data, ssh to mirror server and
+
+run /path2/external_data_downloads/download_package /path2/external_data_downloads/ftp.ensembl.org.cdna
+
+```
+
+## Dependencies
+```bash
+   sh shell
+   wget
+```
