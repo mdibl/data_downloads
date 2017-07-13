@@ -21,7 +21,8 @@ REMOTE_FILES: list of files to download - wild cards can be used
               (example: REMOTE_FILES="Mus_musculus.*.cdna.all.fa.gz"
 LOCAL_DIR: absolute path to local downloads directory 
              (example: LOCAL_DIR =$REMOTE_SITE$REMOTE_DIR)
-By default the program will set this to LOCAL_DIR =$REMOTE_SITE$REMOTE_DIR if the variable LOCAL_DIR was not set in the package configuration file.
+By default the program will set this to LOCAL_DIR =$REMOTE_SITE$REMOTE_DIR 
+   if the variable LOCAL_DIR was not set in the package configuration file.
 
 WGET_OPTIONS - wget command line options to use (example: WGET_OPTIONS="-S -t 10 -nd -m")
 ```
@@ -32,7 +33,9 @@ WGET_OPTIONS - wget command line options to use (example: WGET_OPTIONS="-S -t 10
 
 ssh to server host
 cd /path2/data_downloads/
-run ./download_package package.config (where package.config is the configuration file of the package to download)
+run ./download_package package.config 
+   (where package.config is the configuration file of the package to download)
+   
 Example 1: To download Ensembl CDNA data, ssh to mirror server and
 
 run /path2/data_downloads/download_package /path2/data_downloads/ftp.ensembl.org.cdna
