@@ -17,10 +17,10 @@ LOGS_BASE=/data/logs
 # Log files associated with scripts included in this product
 # will be stored here
 #
-LOG_DIR=${LOGS_BASE}/data_downloads
+DOWNLOADS_LOG_DIR=${LOGS_BASE}/data_downloads
 
 
-export EXTERNAL_DATA_BASE LOGS_BASE LOG_DIR
+export EXTERNAL_DATA_BASE LOGS_BASE DOWNLOADS_LOG_DIR
 
 # Data sources
 #
@@ -35,5 +35,4 @@ export ENSEMBL_FTP_URL NCBI_FTP_URL
 export SANGER_FTP_URL EBI_FTP_URL
 
 export STRING_HTTPS_URL
-
 

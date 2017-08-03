@@ -19,8 +19,8 @@ cp Configuration.default Configuration
 env
 
 
-if [ ! -d ${LOG_DIR} ]
+if [ ! -d ${DOWNLOADS_LOG_DIR} ]
 then
-    mkdir ${LOG_DIR}
+    mkdir ${DOWNLOADS_LOG_DIR}
 fi
 
