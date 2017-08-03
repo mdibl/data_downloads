@@ -31,6 +31,8 @@ EBI_FTP_URL=ftp.ebi.ac.uk
 
 
 STRING_HTTPS_URL=string-db.org
+MGI_HTTP_URL=www.informatics.jax.org
+
 export ENSEMBL_FTP_URL NCBI_FTP_URL 
 export SANGER_FTP_URL EBI_FTP_URL
 
