@@ -1,0 +1,26 @@
+#!/bin/sh
+
+#
+# Install
+#
+
+cd `dirname $0`
+
+pwd
+
+if [ -f Configuration ]
+then
+  rm Configuration
+fi
+cp Configuration.default Configuration
+
+. ./Configuration
+
+env
+
+
+if [ ! -d ${LOG_DIR} ]
+then
+    mkdir ${LOG_DIR}
+fi
+
