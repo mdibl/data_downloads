@@ -1,0 +1,23 @@
+
+#
+# Auhtor: lhuchin
+# Date : August 2017
+#
+#
+# Note:
+#  If you for some reasons you want the downloads to
+#  be sotered somewhere else then change the following
+#  base directories as needed
+#
+EXTERNAL_DATA_BASE=/data/external
+LOGS_BASE=/data/logs
+
+#
+# Log directory base for this product
+# Log files associated with scripts included in this product
+# will be stored here
+#
+LOG_DIR=${LOGS_BASE}/data_downloads
+
+
+export EXTERNAL_DATA_BASE LOGS_BASE LOG_DIR
