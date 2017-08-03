@@ -21,3 +21,19 @@ LOG_DIR=${LOGS_BASE}/data_downloads
 
 
 export EXTERNAL_DATA_BASE LOGS_BASE LOG_DIR
+
+# Data sources
+#
+ENSEMBL_FTP_URL=ftp.ensembl.org
+NCBI_FTP_URL=ftp.ncbi.nih.gov
+SANGER_FTP_URL=ftp.sanger.ac.uk
+EBI_FTP_URL=ftp.ebi.ac.uk
+
+
+STRING_HTTPS_URL=string-db.org
+export ENSEMBL_FTP_URL NCBI_FTP_URL 
+export SANGER_FTP_URL EBI_FTP_URL
+
+export STRING_HTTPS_URL
+
+
