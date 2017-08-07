@@ -21,7 +21,7 @@ source ../Configuration
 
 release_readme_config="ensembl/ftp.ensembl.org.current_readme.cfg"
 
-ENSEMBL_BASE="$EXTERNAL_DATA_BASE/$ENSEMBL_FTP_URL"
+ENSEMBL_BASE="$EXTERNAL_DATA_BASE/ensembl"
 #setup the log
 LOG_FILE="${DOWNLOADS_LOG_DIR}/$SCRIPT_NAME.log"
 rm -rf $LOG_FILE
