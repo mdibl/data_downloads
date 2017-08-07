@@ -180,7 +180,7 @@ fi
 #
 # Create symbolic link for this source if needed
 #
-if [ $create_src_symlink ]
+if [ "$create_src_symlink" = true ]
 then
   cd $EXTERNAL_DATA_BASE
   rm -f $source_name
