@@ -19,13 +19,14 @@ fi
 
 source ../Configuration
 
-release_readme_config="ensembl/ftp.ensembl.org.current_readme"
+release_readme_config="ensembl/ftp.ensembl.org.current_readme.cfg"
 
 ENSEMBL_BASE="$EXTERNAL_DATA_BASE/$ENSEMBL_FTP_URL"
 #setup the log
 LOG_FILE="${DOWNLOADS_LOG_DIR}/$SCRIPT_NAME.log"
 rm -rf $LOG_FILE
 touch $LOG_FILE
+
 date | tee -a $LOG_FILE
 echo "**********              *******************" | tee -a $LOG_FILE
 echo " Checking Ensembl Current Release Number"| tee -a $LOG_FILE
@@ -46,8 +47,9 @@ echo "File: latest_README"| tee -a $LOG_FILE
 echo ""| tee -a $LOG_FILE
 echo ""| tee -a $LOG_FILE
 echo "Program complete"| tee -a $LOG_FILE
+
 echo "********** System dump *******************"| tee -a $LOG_FILE
 echo " ENVIRONMENT VARIABLES DUMP"| tee -a $LOG_FILE
 echo "**********  *******************************"| tee -a $LOG_FILE
-env | tee -a $LOG_FILE
+env | sort | tee -a $LOG_FILE
 exit 0
