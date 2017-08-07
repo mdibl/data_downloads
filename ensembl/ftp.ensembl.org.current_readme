@@ -1,0 +1,52 @@
+#!/bin/sh
+
+TOP=`pwd`
+comment="Ensembl's Current Release Readme file"
+source_name=ensembl
+
+# This will be used in the naming the log file
+#
+# set path of files on remote server
+
+EXTERNAL_DATA_BASE=/data/external
+REMOTE_SITE=ftp.ensembl.org
+#url to remote site
+REMOTE_SITE_URL=ftp://$REMOTE_SITE
+#REMOTE_DIR=/pub
+REMOTE_DIR=/pub
+LOCAL_DIR=$REMOTE_SITE
+## List of files to download
+#
+REMOTE_FILES="current_README"
+#
+# wget options
+remote_user=anonymous
+remote_password=biocore@mdibl.org
+
+echo "$LOCAL_DIR;$REMOTE_SITE_URL"
+
+WGET_OPTIONS="-O latest_README --user=$remote_user --password=$remote_password --no-parent -S -t 10 -nd -m"
+
+
+#
+# wget
+# -S = print the headers sent by HTTP servers and responses sent by FTP servers.
+# -o = full path to log file
+# -O = full path to output file
+# -t = number of retries
+# -r = reverse
+# -k 7 = sort by the 7th column
+# -nd = don't create directories
+# -m = Turn on options suitable for mirroring. This option turns on recursion 
+#    and time-stamping, sets infinite recursion depth and keeps FTP 
+#    directory listings. It is currently equivalent to .-r -N -l 
+#    inf --no-remove-listing.. 
+
+#******** Optional *************
+
+# create a symbolic link for this source
+#
+create_src_symlink=true
+# Remove any files in local directory that are not in remote directory
+do_deletes=false
+recursive=false
