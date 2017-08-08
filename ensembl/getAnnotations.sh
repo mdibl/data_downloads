@@ -9,13 +9,19 @@
 cd `dirname $0`
 WORKING_DIR=`pwd`
 SCRIPT_NAME=`basename $0`
+
+if [ $# -lt 1 ]
+then
+  echo "Usage ./$SCRIPT_NAME annotation_config"
+  exit 1
+fi
 #
 #Relative to current working directory
 #
 DOWNLOAD_SCRIPT=../download_package
 PEP_CONFIG=ftp.ensembl.org.pep.cfg
 MAIN_CONFIG=../Configuration
-SRC_NAME=ensembl
+
 
 if [ ! -f $MAIN_CONFIG ]
 then
@@ -33,7 +39,9 @@ fi
 source ./$MAIN_CONFIG
 source ./$PEP_CONFIG
 
-LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.$RELEASE_NUMBER.log
+SRC_NAME=$SHORT_NAME
+
+LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.$SRC_NAME.$RELEASE_NUMBER.log
 rm -f $LOG
 touch $LOG
 echo "==" | tee -a $LOG
