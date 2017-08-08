@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Organization: MDIBL
+# Author: Lucie Hutchins
+# Date: August 2017
+#
 # This script returns the release number
 
 cd `dirname $0`
