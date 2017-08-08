@@ -63,7 +63,7 @@ RELEASE_NUMBER=`head ${ENSEMBL_BASE}/current_README | grep "Ensembl Release" |se
 release_flag=${ENSEMBL_BASE}/current_release_NUMBER.$RELEASE_NUMBER
 touch $release_flag
 
-echo "Release Number:$RELEASE_NUMBER"| tee -a $LOG_FILE
+echo "Current Release Number:$RELEASE_NUMBER"| tee -a $LOG_FILE
 echo ""| tee -a $LOG_FILE
 echo "Program complete"| tee -a $LOG_FILE
 
