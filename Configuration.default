@@ -12,6 +12,9 @@
 #
 EXTERNAL_DATA_BASE=/data/external
 LOGS_BASE=/data/logs
+WORKING_DIR=`pwd`
+
+DATA_DOWNLOADS_BASE=`realpath $WORKING_DIR`
 
 #
 # Log directory base for this product
@@ -20,4 +23,4 @@ LOGS_BASE=/data/logs
 #
 DOWNLOADS_LOG_DIR=${LOGS_BASE}/data_downloads
 
-export EXTERNAL_DATA_BASE LOGS_BASE DOWNLOADS_LOG_DIR
+export EXTERNAL_DATA_BASE LOGS_BASE DOWNLOADS_LOG_DIR DATA_DOWNLOADS_BASE
