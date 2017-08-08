@@ -33,7 +33,7 @@ fi
 source ./$MAIN_CONFIG
 source ./$PEP_CONFIG
 
-LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.log
+LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.$RELEASE_NUMBER.log
 rm -f $LOG
 touch $LOG
 echo "==" | tee -a $LOG
