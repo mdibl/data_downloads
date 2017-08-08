@@ -1,5 +1,7 @@
 #!/bin/sh
 
+#Author: Lucie Hutchins
+#Date: August 2017
 #
 #Wrapper script to download Ensembl protein dataset
 #
