@@ -19,7 +19,7 @@ fi
 #Relative to current working directory
 #
 DOWNLOAD_SCRIPT=../download_package
-PEP_CONFIG=ftp.ensembl.org.pep.cfg
+ANNOT_CONFIG=$1
 MAIN_CONFIG=../Configuration
 
 
@@ -28,16 +28,16 @@ then
   echo "$MAIN_CONFIG file missing "     
   exit 1
 fi
-if [ ! -f $PEP_CONFIG ]
+if [ ! -f $ANNOT_CONFIG ]
 then
-  echo "'$PEP_CONFIG' file missing under $WORKING_DIR"     
+  echo "'$ANNOT_CONFIG' file missing under $WORKING_DIR"     
   exit 1
 fi
 
 # get global environment variable from config files
 #
 source ./$MAIN_CONFIG
-source ./$PEP_CONFIG
+source ./$ANNOT_CONFIG
 
 SRC_NAME=$SHORT_NAME
 
