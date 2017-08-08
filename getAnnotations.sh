@@ -22,13 +22,11 @@ DOWNLOAD_SCRIPT=download_package
 ANNOT_CONFIG=$1
 MAIN_CONFIG=Configuration
 
-
 if [ ! -f $MAIN_CONFIG ]
 then
   echo "$MAIN_CONFIG file missing "     
   exit 1
 fi
-
 if [ ! -f $ANNOT_CONFIG ]
 then
   echo "'$ANNOT_CONFIG' file missing "     
@@ -40,12 +38,11 @@ fi
 source ./$MAIN_CONFIG
 source ./$ANNOT_CONFIG
 
-
 LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.$SHORT_NAME.$RELEASE_NUMBER.$DATASET.log
 rm -f $LOG
 touch $LOG
 echo "==" | tee -a $LOG
-echo "Date:"`date` | tee -a $LOG
+echo "Start Date:"`date` | tee -a $LOG
 echo "Ensembl Release: $RELEASE_NUMBER"  | tee -a $LOG
 echo "Ensembl Dataset: pep"  | tee -a $LOG
 echo "Remote site: $REMOTE_SITE"  | tee -a $LOG
@@ -69,6 +66,6 @@ then
 fi
 echo "Status: SUCCESS" | tee -a $LOG
 echo "=="
-date | tee -a $LOG
+echo "End Date:"`date` | tee -a $LOG
 echo ""
 exit 0
