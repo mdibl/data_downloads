@@ -1,9 +1,7 @@
 #!/bin/sh
 #
-#
 # Auhtor: lhuchin
 # Date : August 2017
-#
 #
 # Note:
 #  If you for some reasons you want the downloads to
@@ -19,6 +17,5 @@ LOGS_BASE=/data/logs
 # will be stored here
 #
 DOWNLOADS_LOG_DIR=${LOGS_BASE}/data_downloads
-
 
 export EXTERNAL_DATA_BASE LOGS_BASE DOWNLOADS_LOG_DIR
