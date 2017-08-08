@@ -1,5 +1,9 @@
 #!/usr/bin/sh
 #
+# Organization: MDIBL
+# Author: Lucie Hutchins
+# Date: August 2017
+#
 #A simple script that downloads and stores locally the cuurent release
 # number of Ensembl database
 #
