@@ -1,7 +1,8 @@
 #!/bin/sh
 
-#Author: Lucie Hutchins
-#Date: August 2017
+# Organization: MDIBL
+# Author: Lucie Hutchins
+# Date: August 2017
 #
 #Wrapper script to download Ensembl protein dataset
 #
@@ -23,17 +24,14 @@ then
 fi
 if [ ! -f $PEP_CONFIG ]
 then
-  echo "'ensembl/ftp.ensembl.org.pep.cfg' file missing under $WORKING_DIR"     
+  echo "'$PEP_CONFIG' file missing under $WORKING_DIR"     
   exit 1
 fi
 
 # get global environment variable from config files
 #
 source ./$MAIN_CONFIG
-#cd $SRC_NAME
 source ./$PEP_CONFIG
-#cd $WORKING_DIR
-
 
 LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.log
 rm -f $LOG
