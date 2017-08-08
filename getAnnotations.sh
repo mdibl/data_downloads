@@ -40,9 +40,8 @@ fi
 source ./$MAIN_CONFIG
 source ./$ANNOT_CONFIG
 
-SRC_NAME=$SHORT_NAME
 
-LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.$SRC_NAME.$RELEASE_NUMBER.log
+LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.$SHORT_NAME.$RELEASE_NUMBER.$DATASET.log
 rm -f $LOG
 touch $LOG
 echo "==" | tee -a $LOG
@@ -57,10 +56,10 @@ echo "Remote files:" | tee -a $LOG
 echo " $REMOTE_FILES" | tee -a $LOG
 echo "==" | tee -a $LOG
 echo "Running script from: $WORKING_DIR"| tee -a $LOG
-echo "Command: ./$DOWNLOAD_SCRIPT $SRC_NAME/$PEP_CONFIG"| tee -a $LOG
+echo "Command: ./$DOWNLOAD_SCRIPT $ANNOT_CONFIG"| tee -a $LOG
 echo "==" | tee -a $LOG
 
-./$DOWNLOAD_SCRIPT $SRC_NAME/$PEP_CONFIG   2>&1 | tee -a $LOG
+./$DOWNLOAD_SCRIPT $ANNOT_CONFIG   2>&1 | tee -a $LOG
 
 echo "=="
 if [ $? -ne 0 ]
