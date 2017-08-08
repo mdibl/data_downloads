@@ -12,15 +12,15 @@ SCRIPT_NAME=`basename $0`
 
 if [ $# -lt 1 ]
 then
-  echo "Usage ./$SCRIPT_NAME annotation_config"
+  echo "Usage ./$SCRIPT_NAME path2annotation_config"
   exit 1
 fi
 #
 #Relative to current working directory
 #
-DOWNLOAD_SCRIPT=../download_package
+DOWNLOAD_SCRIPT=download_package
 ANNOT_CONFIG=$1
-MAIN_CONFIG=../Configuration
+MAIN_CONFIG=Configuration
 
 
 if [ ! -f $MAIN_CONFIG ]
@@ -28,9 +28,10 @@ then
   echo "$MAIN_CONFIG file missing "     
   exit 1
 fi
+
 if [ ! -f $ANNOT_CONFIG ]
 then
-  echo "'$ANNOT_CONFIG' file missing under $WORKING_DIR"     
+  echo "'$ANNOT_CONFIG' file missing "     
   exit 1
 fi
 
