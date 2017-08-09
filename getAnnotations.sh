@@ -12,7 +12,8 @@ SCRIPT_NAME=`basename $0`
 
 if [ $# -lt 1 ]
 then
-  echo "Usage ./$SCRIPT_NAME path2annotation_config"
+  echo "Usage: ./$SCRIPT_NAME path2annotation_config"
+  echo "Example: ./$SCRIPT_NAME ensembl/ftp.ensembl.org.cdna.cfg"
   exit 1
 fi
 #
@@ -44,7 +45,7 @@ touch $LOG
 echo "==" | tee -a $LOG
 echo "Start Date:"`date` | tee -a $LOG
 echo "Ensembl Release: $RELEASE_NUMBER"  | tee -a $LOG
-echo "Ensembl Dataset: pep"  | tee -a $LOG
+echo "Ensembl Dataset: $DATASET"  | tee -a $LOG
 echo "Remote site: $REMOTE_SITE"  | tee -a $LOG
 echo "Remote directory: $REMOTE_DIR"  | tee -a $LOG
 echo "Local directory: $EXTERNAL_DATA_BASE/$LOCAL_DIR" | tee -a $LOG 
