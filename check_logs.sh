@@ -9,12 +9,11 @@
 # Example: 
 # ./check_logs.sh $DOWNLOADS_LOG_DIR/ftp.ensembl.org
 #
+# In the above example the script uses ftp.ensembl.org.* to check all the logs generated
+# 
 # Author: Lucie Hutchins 
 # Date : August 2017
 #
-log_report=""
-LOG_FILES=""
-
 if [ $# -lt 1 ]
 then
    echo "Usage: ./check_logs.sh path2/list_of_log_files "
@@ -23,7 +22,6 @@ then
    exit 1
 fi
 date
-
 LOG_BASE=`dirname $1`
 log_prefix=`basename $1`
 log_report="$LOG_BASE/$log_prefix-check_logs.log"
