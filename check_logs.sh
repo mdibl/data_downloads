@@ -1,14 +1,13 @@
 #!/bin/sh
-
 #
 # This script checks logs generated
 # from wget process for errors
 # It is called after each data download
 # (ensembl, ncbi, ...)
 #
-# Usage: ./check_mirror_log.sh report_out_file list_of_log_files
+# Usage: ./check_logs.sh report_out_file list_of_log_files
 # Example: 
-# ./check_mirror_log.sh $MIRRORLOGS/ensembl.sh.log $MIRRORLOGS/logfile1.log ... $MIRRORLOGS/logfile_n.log  
+# ./check_logs.sh $MIRRORLOGS/ensembl.sh.log $DOWNLOADS_LOG_DIR/logfile1.log ... $DOWNLOADS_LOG_DIR/logfile_n.log  
 #
 # Author: lnh
 # Date : August 2017
@@ -39,7 +38,6 @@ fi
 
 date
 
-
 log_report=$1
 LOG_FILES=$2
 
@@ -61,12 +59,12 @@ function getLogStatus() {
        if [ "$error_found" != "" ]
        then
             rstatus="Failed"
-            echo "Found: \"$error_found\" "
-            
+            echo "Found: \"$error_found\" "   
         fi
   done
   echo "Status: $rstatus" 
 }
+#clean previous report
 rm -rf $log_report
 touch $log_report
 date | tee -a $log_report
