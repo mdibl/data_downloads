@@ -19,7 +19,7 @@ if [ $# -lt 1 ]
 then
    echo "Usage: ./check_logs.sh path2/list_of_log_files "
    echo "Example:"
-   echo "./check_logs.sh $DOWNLOADS_LOG_DIR/ftp.ensembl.org"
+   echo "./check_logs.sh DOWNLOADS_LOG_DIR/ftp.ensembl.org"
    exit 1
 fi
 date
