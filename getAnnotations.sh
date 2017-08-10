@@ -4,7 +4,8 @@
 # Author: Lucie Hutchins
 # Date: August 2017
 #
-#Wrapper script to download Ensembl protein dataset
+#Wrapper script to call the download script 
+# It creates an additional log that could be use later on
 #
 cd `dirname $0`
 WORKING_DIR=`pwd`
