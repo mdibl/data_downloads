@@ -9,7 +9,7 @@
 # Example: 
 # ./check_logs.sh $DOWNLOADS_LOG_DIR/ftp.ensembl.org
 #
-# Author: lnh
+# Author: Lucie Hutchins 
 # Date : August 2017
 #
 log_report=""
