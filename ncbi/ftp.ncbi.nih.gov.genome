@@ -21,7 +21,7 @@ REMOTE_DIR=/$DATASET
 
 #Local directory relative to data downloads root directory
 # 
-LOCAL_DIR=${SHORT_NAME}/$REMOTE_DIR
+LOCAL_DIR=${SHORT_NAME}$REMOTE_DIR
 
 
 ## List of files to download

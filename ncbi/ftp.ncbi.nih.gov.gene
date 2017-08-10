@@ -21,7 +21,7 @@ REMOTE_DIR=/$DATASET/DATA
 
 #Local directory relative to data downloads root directory
 # 
-LOCAL_DIR=${SHORT_NAME}/$REMOTE_DIR
+LOCAL_DIR=${SHORT_NAME}$REMOTE_DIR
 
 
 ## List of files to download
@@ -33,7 +33,6 @@ gene_history.gz
 gene_info.gz 
 README
 mim2gene_medgen"
-"
 #
 # wget options
 remote_user=anonymous
