@@ -25,7 +25,7 @@ date
 LOG_BASE=`dirname $1`
 log_prefix=`basename $1`
 log_report="$LOG_BASE/$log_prefix-check_logs.log"
-LOG_FILES="$log_prefix.*"
+LOG_FILES=$LOG_BASE/$log_prefix.*
 
 ERROR_TERMS=("Fatal"
 "Failure"
@@ -74,4 +74,4 @@ done
 echo "Logs check done " | tee -a $log_report
 date | tee -a $log_report
 
-mailx -s "MIRROR: $log_report" $EMAIL_TO < $log_report
+mailx -s "LOG Checks: $log_report" $EMAIL_TO < $log_report
