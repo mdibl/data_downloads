@@ -5,9 +5,9 @@
 # It is called after each data download
 # (ensembl, ncbi, ...)
 #
-# Usage: ./check_logs.sh report_out_file list_of_log_files
+# Usage: ./check_logs.sh list_of_log_files
 # Example: 
-# ./check_logs.sh $MIRRORLOGS/ensembl.sh.log $DOWNLOADS_LOG_DIR/logfile1.log ... $DOWNLOADS_LOG_DIR/logfile_n.log  
+# ./check_logs.sh $DOWNLOADS_LOG_DIR/ftp.ensembl.org
 #
 # Author: lnh
 # Date : August 2017
@@ -15,31 +15,19 @@
 log_report=""
 LOG_FILES=""
 
-if [ $# -lt 2 ]
+if [ $# -lt 1 ]
 then
-   echo "Usage: ./check_mirror_log.sh report_out_file list_of_log_files "
+   echo "Usage: ./check_logs.sh path2/list_of_log_files "
+   echo "Example:"
+   echo "./check_logs.sh $DOWNLOADS_LOG_DIR/ftp.ensembl.org"
    exit 1
 fi
-# Source mgiconfig master config file
-cd `dirname $0`
-WORKING_DIR=`pwd`
-#
-# Check if the main config file exists
-#
-MAIN_CONFIG=$WORKING_DIR/Configuration
-if [ ! -r $MAIN_CONFIG ]
-then
-  echo "The main Configuration file is missing from $WORKING_DIR"
-  echo "Run the Install script "
-  exit 1
-fi
-# source the main config file
-. ${MAIN_CONFIG}
-
 date
 
-log_report=$1
-LOG_FILES=$2
+LOG_BASE=`dirname $1`
+log_prefix=`basename $1`
+log_report="$LOG_BASE/$log_prefix-check_logs.log"
+LOG_FILES="$log_prefix.*"
 
 ERROR_TERMS=("Fatal"
 "Failure"
