@@ -44,8 +44,8 @@ rm -f $LOG
 touch $LOG
 echo "==" | tee -a $LOG
 echo "Start Date:"`date` | tee -a $LOG
-echo "Ensembl Release: $RELEASE_NUMBER"  | tee -a $LOG
-echo "Ensembl Dataset: $DATASET"  | tee -a $LOG
+echo "$SHORT_NAME Release: $RELEASE_NUMBER"  | tee -a $LOG
+echo "$SHORT_NAME Dataset: $DATASET"  | tee -a $LOG
 echo "Remote site: $REMOTE_SITE"  | tee -a $LOG
 echo "Remote directory: $REMOTE_DIR"  | tee -a $LOG
 echo "Local directory: $EXTERNAL_DATA_BASE/$LOCAL_DIR" | tee -a $LOG 
@@ -57,7 +57,7 @@ echo "Running script from: $WORKING_DIR"| tee -a $LOG
 echo "Command: ./$DOWNLOAD_SCRIPT $ANNOT_CONFIG"| tee -a $LOG
 echo "==" | tee -a $LOG
 
-./$DOWNLOAD_SCRIPT $ANNOT_CONFIG   2>&1 | tee -a $LOG
+#./$DOWNLOAD_SCRIPT $ANNOT_CONFIG   2>&1 | tee -a $LOG
 
 echo "=="
 if [ $? -ne 0 ]
