@@ -73,5 +73,3 @@ do
 done
 echo "Logs check done " | tee -a $log_report
 date | tee -a $log_report
-
-mailx -s "LOG Checks: $log_report" $EMAIL_TO < $log_report
