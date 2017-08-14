@@ -66,8 +66,9 @@ fi
 
 RELEASE_NUMBER=`head ${ENSEMBL_BASE}/current_README | grep "Ensembl Release" |sed 's/Databases.//'|sed 's/Ensembl Release //'`
 ## Create the current release Number file
-release_flag=${ENSEMBL_BASE}/current_release_NUMBER.$RELEASE_NUMBER
+release_flag=${ENSEMBL_BASE}/current_release_NUMBER
 touch $release_flag
+echo "$RELEASE_NUMBER" > $release_flag
 
 echo "Current Release Number:$RELEASE_NUMBER"| tee -a $LOG_FILE
 echo ""| tee -a $LOG_FILE
