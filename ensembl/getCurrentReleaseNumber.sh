@@ -19,7 +19,7 @@ RELEASE_NUMBER=0
 if [ -d $RELEASE_BASE ]
 then
   cd $RELEASE_BASE
-  RELEASE_NUMBER=`cat current_release_NUMBER`
+  RELEASE_NUMBER=`cat current_release_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
 fi
 echo "$RELEASE_NUMBER"
 
