@@ -19,7 +19,7 @@ RELEASE_NUMBER=0
 if [ -d $RELEASE_BASE ]
 then
   cd $RELEASE_BASE
-  RELEASE_NUMBER=`ls | grep current_release_NUMBER | sed 's/current_release_NUMBER.//'`
+  RELEASE_NUMBER=`cat current_release_NUMBER`
 fi
 echo "$RELEASE_NUMBER"
 
