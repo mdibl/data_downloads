@@ -32,7 +32,7 @@ then
     if [ -d $RELEASE_DIR ]
     then
         rm -f current
-        ln -s $RELEASE_DIR
+        ln -s $RELEASE_DIR current
     fi
 fi 
 echo "$RELEASE_NUMBER"
