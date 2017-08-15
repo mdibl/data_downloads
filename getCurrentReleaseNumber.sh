@@ -28,6 +28,12 @@ then
     cd $RELEASE_BASE
     RELEASE_NUMBER=`cat current_release_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
     #Check if the release directory exists - then check if symbolic link 'current' exists
+    RELEASE_DIR="$RELEASE_DIR_PREFIX$RELEASE_NUMBER"
+    if [ -d $RELEASE_DIR ]
+    then
+        rm -f current
+        ln -s $RELEASE_DIR
+    fi
 fi 
 echo "$RELEASE_NUMBER"
 
