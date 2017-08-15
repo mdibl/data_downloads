@@ -10,6 +10,7 @@ cd `dirname $0`
 
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
+RELEASE_NUMBER=0
 
 if [ $# -lt 1 ]
 then 
@@ -20,14 +21,14 @@ fi
 
 source ./Configuration
 source ./$1
-
 RELEASE_BASE=$EXTERNAL_DATA_BASE/$SHORT_NAME
-RELEASE_NUMBER=0
-if [ -d $RELEASE_BASE ]
+
+if [ -f $RELEASE_BASE/current_release_NUMBER ]
 then
-  cd $RELEASE_BASE
-  RELEASE_NUMBER=`cat current_release_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
-fi
+    cd $RELEASE_BASE
+    RELEASE_NUMBER=`cat current_release_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
+    #Check if the release directory exists - then check if symbolic link 'current' exists
+fi 
 echo "$RELEASE_NUMBER"
 
 exit 0
