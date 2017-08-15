@@ -151,7 +151,6 @@ for remote_file in ${REMOTE_FILES}
 do
    echo "$remote_file"
    target_file="$REMOTE_SITE_URL$REMOTE_DIR/$remote_file"
-   echo "$WGET $WGET_OPTIONS $target_file" | tee -a  ${LOG_FILE}
    ## get the directory part from the remote_file name
    target_local_dir=`dirname $remote_file`
    echo "Creating new directory $target_local_dir"
@@ -172,7 +171,12 @@ do
    then
        rm -f $remote_file
    fi
-   $WGET -a ${LOG_FILE} $WGET_OPTIONS "$target_file" 
+   if [ "$IS_HTTP_PATTERN" = true ]
+   then
+       $WGET -a ${LOG_FILE} $WGET_OPTIONS -A "$remote_file" "$REMOTE_SITE_URL$REMOTE_DIR/" 
+    else
+       $WGET -a ${LOG_FILE} $WGET_OPTIONS "$target_file" 
+    fi
 done
 )
 fi
