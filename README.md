@@ -33,12 +33,14 @@ WGET_OPTIONS - wget command line options to use (example: WGET_OPTIONS="-S -t 10
 
 ssh to server host
 cd /path2/data_downloads/
-run ./download_package package.config 
+run ./getAnnotations.sh  source/package.config 
    (where package.config is the configuration file of the package to download)
    
-Example 1: To download Ensembl CDNA data, ssh to mirror server and
-
-run /path2/data_downloads/download_package /path2/data_downloads/ftp.ensembl.org.cdna
+Example 1: To download Ensembl CDNA data, ssh to downloads server and
+ 1) ssh to one biocore servers
+ 2) cd to /usr/local/biocore/data_downloads
+ 3) run ./getAnnotations.sh ensembl/ftp.ensembl.org.cdna.cfg
+ 
 
 ```
 
