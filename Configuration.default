@@ -6,9 +6,9 @@
 #
 #
 # Note:
-#  If you for some reasons you want the downloads to
-#  be sotered somewhere else then change the following
-#  base directories as needed
+#  If for some reasons you want the downloads to
+#  be sotered somewhere else than EXTERNAL_DATA_BASE,
+#  then change the following base directories as needed
 #
 EXTERNAL_DATA_BASE=/data/external
 LOGS_BASE=/data/logs
