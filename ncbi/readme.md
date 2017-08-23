@@ -1,6 +1,6 @@
 Base directory to store NCBI downloads scripts and config files
 
-# What Do We Download From NCBI? ftp.ncbi.nih.gov
+# What Do We Download From NCBI -  ftp.ncbi.nih.gov ?
 
 ## Genes : /gene
   * README
