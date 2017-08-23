@@ -1,8 +1,8 @@
 Base directory to store NCBI downloads scripts and config files
 
-# What Do We Download From NCBI?
+# What Do We Download From NCBI? ftp.ncbi.nih.gov
 
-## Genes : /pub/gene
+## Genes : /gene
   * README
   * DATA/gene2accession.gz 
   * DATA/gene2pubmed.gz 
