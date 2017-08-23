@@ -19,7 +19,7 @@ Base directory to store Ensembl downloads scripts and config files
  * pep   (Protein Sequence Data)
 
 ## Ensembl downloads frequency
-According the Ensembl site, Ensembl data is released on an approximately three-month cycle http://www.ensembl.org/info/about/release_cycle.html. However, we have scheduled 
+According to Ensembl site, Ensembl data is released on an approximately three-month cycle http://www.ensembl.org/info/about/release_cycle.html. However, we have scheduled 
 our new release detector cron to run daily and toggle the download whenever a new release is detected.
 
 See : https://jenkins.mdibl.org/job/Ensembl/
