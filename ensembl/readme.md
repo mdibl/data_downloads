@@ -1,6 +1,6 @@
 Base directory to store Ensembl downloads scripts and config files
 
-# What do we download from Ensembl -- ftp:://ftp.ensembl.org ?
+# What do we download from Ensembl -- ftp://ftp.ensembl.org ?
 
 ## Organisms
   * caenorhabditis_elegans 
