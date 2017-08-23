@@ -24,4 +24,4 @@ our new release detector cron to run daily and toggle the download whenever a ne
 
 See : https://jenkins.mdibl.org/job/Ensembl/
 
-Runs daily: 2PM
+Runs daily: 1PM
