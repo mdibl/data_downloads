@@ -23,6 +23,10 @@ Base directory to store NCBI downloads scripts and config files
   * taxdump_readme.txt
   * taxdump.tar.gz.md5
   
+## NCBI downloads frequency
+
+Genes and taxonomy files are updated daily so, we have scheduled our downloads to run daily.
+
   
 Runs daily: 9:30AM
 
