@@ -1,8 +1,8 @@
 Base directory to store Mirbase downloads scripts and config files
 
-# What do we download from MirBase?
+# What do we download from MirBase -- ftp://mirbase.org ?
 
-## Datasets
+## Datasets : /pub/mirbase/...
  * miRNA.dat     - all entries in (almost) EMBL format
  * hairpin.fa    - predicted miR stem-loop sequences in fasta format
  * mature.fa     - mature sequences in fasta format
