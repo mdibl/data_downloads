@@ -23,3 +23,5 @@ According to Ensembl site, Ensembl data is released on an approximately three-mo
 our new release detector cron to run daily and toggle the download whenever a new release is detected.
 
 See : https://jenkins.mdibl.org/job/Ensembl/
+
+Runs daily: 11AM
