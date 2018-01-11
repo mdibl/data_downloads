@@ -43,12 +43,10 @@ Example 1: To download Ensembl CDNA data, ssh to downloads server and
  
 
 ```
-# Local Data Storage
+# Data Local Storage
 
 Data is stored by sourcce/version/organism/ - We stored data as downloaded from the source 
-under /data/external.
-
-The uncompressed version of the data is stored under /data/scratch
+under /data/external. However,the uncompressed version of the data is stored under /data/scratch
 
 ## Ensembl Data - Uncompressed data
 For each organism in addition to the original file :
