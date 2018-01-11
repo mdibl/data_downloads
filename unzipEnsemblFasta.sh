@@ -108,8 +108,8 @@ do
   #
   if [ "$SHORT_NAME" = "ensembl" ]
   then
-      joined_dir=$SCRATCH_DIR/$organism-transcriptome-joined
-      [ ! -d $SCRATCH_DIR/$organism-transcriptome ] && mkdir $joined_dir
+      joined_dir=$SCRATCH_DIR/$organism-transcriptome_joined
+      [ ! -d $joined_dir ] && mkdir $joined_dir
       joined_file=$joined_dir/$organism-joined.fa
       cat $SCRATCH_DIR/$organism-cdna/*.cdna.all.fa $SCRATCH_DIR/$organism-ncrna/*.ncrna.fa > $joined_file
   fi
