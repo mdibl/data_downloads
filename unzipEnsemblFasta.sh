@@ -70,31 +70,46 @@ date | tee -a $LOG
 cd $SCRATCH_DIR
 for organism in $TAXA
 do
-  if [ -d $DATA_DIR/$organism ]
+  if [ ! -d $DATA_DIR/$organism ]
   then
-     echo ""
-     echo ""
-     echo "===== $organism ====="
-     for dataset in $FASTA_ANNOTATIONS
-     do
-        if [ -d $DATA_DIR/$organism/$dataset ]
-        then 
-           mkdir -p $SCRATCH_DIR/$organism-$dataset  
-           cd $SCRATCH_DIR/$organism-$dataset
-           echo "Unzipping $DATA_DIR/$organism/$dataset dataset under $SCRATCH_DIR/$organism-$dataset" | tee -a $LOG
-           FASTA_FILES=`ls $DATA_DIR/$organism/$dataset | grep gz`
-           for fasta_file in $FASTA_FILES
-           do
-              if [ -f $DATA_DIR/$organism/$dataset/$fasta_file ]
-              then
-                  echo "$fasta_file" | tee -a $LOG
-                  cp -p $DATA_DIR/$organism/$dataset/$fasta_file .
-                  gunzip $fasta_file
-              fi
-           done
-           #Create the mega file if this is dna dataset
+  fi
+  echo ""
+  echo "===== $organism ====="
+  for dataset in $FASTA_ANNOTATIONS
+  do
+     if [ -d $DATA_DIR/$organism/$dataset ]
+     then 
+        mkdir -p $SCRATCH_DIR/$organism-$dataset  
+        cd $SCRATCH_DIR/$organism-$dataset
+        echo "Unzipping $DATA_DIR/$organism/$dataset dataset under $SCRATCH_DIR/$organism-$dataset" | tee -a $LOG
+        [ ! -d temp ] && mkdir temp
+        mv *.fa temp 
+        FASTA_FILES=`ls $DATA_DIR/$organism/$dataset | grep gz`
+        for fasta_file in $FASTA_FILES
+        do
+           if [ -f $DATA_DIR/$organism/$dataset/$fasta_file ]
+           then
+               echo "$fasta_file" | tee -a $LOG
+               cp -p $DATA_DIR/$organism/$dataset/$fasta_file .
+               gunzip $fasta_file
+           fi
+        done
+        #rm -rf temp
+        #Create the mega file if this is dna dataset
+        if [ "$dataset" = "dna" ]
+        then
+           [ ! -f $organism.genome.fa ] && cat *.dna.chromosome.*.fa > $organism.dna.genome.fa 
         fi
-     done 
+     fi
+  done 
+  ## Create the joined transcriptome - for ensembl data only
+  #
+  if [ "$SHORT_NAME" = "ensembl" ]
+  then
+      joined_dir=$SCRATCH_DIR/$organism-transcriptome-joined
+      [ ! -d $SCRATCH_DIR/$organism-transcriptome ] && mkdir $joined_dir
+      joined_file=$joined_dir/$organism-joined.fa
+      cat $SCRATCH_DIR/$organism-cdna/*.cdna.all.fa $SCRATCH_DIR/$organism-ncrna/*.ncrna.fa > $joined_file
   fi
 done
 
