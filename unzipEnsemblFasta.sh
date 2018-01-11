@@ -72,6 +72,8 @@ for organism in $TAXA
 do
   if [ ! -d $DATA_DIR/$organism ]
   then
+     echo "ERROR: Missing directory $DATA_DIR/$organism"
+     exit 1
   fi
   echo ""
   echo "===== $organism ====="
