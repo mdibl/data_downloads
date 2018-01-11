@@ -43,6 +43,31 @@ Example 1: To download Ensembl CDNA data, ssh to downloads server and
  
 
 ```
+# Local Data Storage
+
+Data is stored by sourcce/version/organism/ - We stored data as downloaded from the source 
+under /data/external.
+
+The uncompressed version of the data is stored under /data/scratch
+
+## Ensembl Data - Uncompressed data
+For each organism in addition to the original file :
+1) We create a structure that stores a joined fasta file for both cdna and ncrna datasets. The file name will be : current_prefix.joined.fa
+```
+ Example :
+cat Caenorhabditis_elegans.WBcel235.cdna.all.fa Caenorhabditis_elegans.WBcel235.ncrna.fa >    
+  Caenorhabditis_elegans.WBcel235.joined.fa
+```
+The file is stored under /data/scratch/ensembl-version/organism-transcriptome-joined
+
+2) We create a structure that stores a joined fasta file for the genome. The file has the suffix *.dna.genome.fa
+ 
+ ```
+    Example:  cat *.dna.chromosome.*.fa > $organism.dna.genome.fa
+ ```
+The file is stored under the dna directory for that organism in addition 
+to the chromosome files (/data/scratch/ensembl-version/organism-dna/ )
+
 
 ## Dependencies
 ```bash
