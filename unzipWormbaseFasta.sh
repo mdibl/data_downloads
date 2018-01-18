@@ -82,14 +82,14 @@ do
         dataset_dir=$SCRATCH_DIR/$project-$dataset
         FASTA_FILES=`ls $organism_dir | grep $project | grep $dataset |grep gz`
         ## Next if this project does not include this dataset
-        [ ${#FASTA_FILES[@]} -lt 1 ] && continue
+        [ -z ${FASTA_FILES} ] && continue
 
         mkdir -p $dataset_dir
         cd $dataset_dir
         echo "Unzipping $organism_dir/$project*.$dataset dataset under $dataset_dir" | tee -a $LOG
         [ ! -d temp ] && mkdir temp
         OLD_FASTAS=`ls | grep .fa`
-        [ ${#OLD_FASTAS[@]} -gt 0 ] && mv *.fa temp
+        [ -n ${OLD_FASTAS} ] && mv *.fa temp
 
         for fasta_file in $FASTA_FILES
         do
