@@ -108,7 +108,7 @@ do
      then
         joined_dir=$SCRATCH_DIR/$project-transcriptome_joined
         [ ! -d $joined_dir ] && mkdir $joined_dir
-        joined_file=$joined_dir/$oproject-joined.fa
+        joined_file=$joined_dir/$project-joined.fa
         cat $SCRATCH_DIR/$project-mRNA_transcripts/*.mRNA_transcripts.fa $SCRATCH_DIR/$project-ncRNA_transcripts/*.ncRNA_transcripts.fa > $joined_file
      fi
   done
