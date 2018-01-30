@@ -83,7 +83,6 @@ do
        [ ! -d $WORKING_DIR/$tool_name ] && continue
        # get this tool version
        source ./$TOOL_CONFIG
-
        organism=${fields[2]}
        dataset=${fields[3]}
        index_prefix=${fields[5]}
