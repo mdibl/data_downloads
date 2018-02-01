@@ -100,7 +100,7 @@ do
         #Create the mega file if this is dna dataset
         if [ "$dataset" = "dna" ]
         then
-           [ ! -f $organism.genome.fa ] && cat *.dna.chromosome.*.fa > $organism.dna.genome.fa 
+           [ ! -f $organism.genome.fa ] && cat *.dna.chromosome.*.fa > $organism.genome.fa 
         fi
      fi
   done 
