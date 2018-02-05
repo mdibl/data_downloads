@@ -6,7 +6,8 @@ A repository to store scripts and configuration files used to download external 
 This product uses wget utilities to download files from a remote server to our local /data/external/ directory (by default).
 There is one main script, written in sh, that does the download. 
 
-Each data source  has its own config file that's passed to the main script at run time. 
+Each data source  has its own config file  and each dataset has a config file where applicabl.
+These files are passed to the main download script at run time. 
 
 The package config file is a shell (sh) config file that sets the following global variables:
 
