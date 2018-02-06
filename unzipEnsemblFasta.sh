@@ -100,7 +100,10 @@ do
         #Create the mega file if this is dna dataset
         if [ "$dataset" = "dna" ]
         then
-           [ ! -f $organism.genome.fa ] && cat *.dna.chromosome.*.fa > $organism.genome.fa 
+           genome_dir=$SCRATCH_DIR/$organism-genome
+           [ ! -d $genome_dir ] && mkdir $genome_dir
+           genome_file=$genome_dir/$organism.genome.fa
+           [ ! -f $genome_file ] && cat *.dna.chromosome.*.fa > $genome_file 
         fi
      fi
   done 
