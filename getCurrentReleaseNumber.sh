@@ -3,6 +3,7 @@
 # Organization: MDIBL
 # Author: Lucie Hutchins
 # Date: August 2017
+# Modified: March 2018
 #
 # This script returns the release number
 
