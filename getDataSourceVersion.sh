@@ -10,7 +10,7 @@
 #
 #
 cd `dirname $0`
-
+ 
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
 GLOBAL_CONFIG=Configuration
