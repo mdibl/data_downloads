@@ -17,7 +17,24 @@ WORKING_DIR=`pwd`
 
 DATA_DOWNLOADS_BASE=`realpath $WORKING_DIR`
 
+##Globally Installed dependencies 
+WGET=`which wget`
+TAR=`which tar`
+UNZIP=`which unzip`
+
+
+#relative to this package base (data_downloads)
+GLOBAL_CONFIG=Configuration
+DOWNLOAD_SCRIPT=download_package.sh
+
+GET_SOURCE_VERSION_SCRIPT=getDataSourceVersion.sh
+SET_SOURCE_VERSION_SCRIPT=setDataSourceVersion.sh
+GET_PACKAGE_MAIN_SCRIPT=runGetDataset.sh
+
+## Relative to each bioformatics source base within this package
 PACKAGE_CONFIGFILE_SUFFIX=_package.cfg
+CURRENT_FLAG_FILE=current_release_NUMBER
+
 #
 # Log directory base for this product
 # Log files associated with scripts included in this product
@@ -26,7 +43,7 @@ PACKAGE_CONFIGFILE_SUFFIX=_package.cfg
 DOWNLOADS_LOG_DIR=${LOGS_BASE}/data_downloads
 
 export EXTERNAL_DATA_BASE LOGS_BASE DOWNLOADS_LOG_DIR DATA_DOWNLOADS_BASE SCRATCH_DATA_BASE
-export PACKAGE_CONFIGFILE_SUFFIX
+export PACKAGE_CONFIGFILE_SUFFIX CURRENT_FLAG_FILE 
 
 EMAIL_TO=lucie.hutchins@mdibl.org
 
