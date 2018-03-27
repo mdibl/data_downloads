@@ -17,6 +17,7 @@ WORKING_DIR=`pwd`
 
 DATA_DOWNLOADS_BASE=`realpath $WORKING_DIR`
 
+PACKAGE_CONFIGFILE_SUFFIX=_package.cfg
 #
 # Log directory base for this product
 # Log files associated with scripts included in this product
@@ -25,6 +26,7 @@ DATA_DOWNLOADS_BASE=`realpath $WORKING_DIR`
 DOWNLOADS_LOG_DIR=${LOGS_BASE}/data_downloads
 
 export EXTERNAL_DATA_BASE LOGS_BASE DOWNLOADS_LOG_DIR DATA_DOWNLOADS_BASE SCRATCH_DATA_BASE
+export PACKAGE_CONFIGFILE_SUFFIX
 
 EMAIL_TO=lucie.hutchins@mdibl.org
 
