@@ -99,47 +99,25 @@ touch ${LOG_FILE}
 echo "Checking ${TOOL_NAME}'s  Current Release"| tee -a ${LOG_FILE}
 echo "The current version info is stored in  ${RELEASE_FILE}"| tee -a ${LOG_FILE}
 
-if [ "${CLONE_GIT}" = true ]
+FILE_TOKEN=`basename ${REMOTE_VERSION_FILE}`
+LOCAL_VERSION_FILE=${PACKAGE_DOWNLOADS_BASE}/${FILE_TOKEN}
+echo "-------------------------------------"
+echo "Using Wget to Download the release version file"| tee -a ${LOG_FILE}
+echo "File to download:${REMOTE_VERSION_FILE}"| tee -a ${LOG_FILE}
+echo ""
+echo ">>>>>>>> Wget output starts here "
+${WGET}  -O ${LOCAL_VERSION_FILE} ${REMOTE_VERSION_FILE} 2>&1 | tee -a ${LOG_FILE}
+echo "<<<<<<<< Wget output ends here "
+echo ""
+if [ ! -f ${LOCAL_VERSION_FILE} ]
 then
-    #clone repos to get current release tag
-    echo "-------------------------------------"
-    echo "Cloning repos to get current release version"
-    echo ""
-    echo ">>>>>>>> Git output starts here "
-    [ ! -d  ${PACKAGE_GIT_CLONE_BASE} ] && mkdir -p ${PACKAGE_GIT_CLONE_BASE}
-    cd ${PACKAGE_GIT_CLONE_BASE}
-    [ ! -d ${GIT_REPOS} ] && ${GIT} clone  ${REMOTE_VERSION_FILE}
-    if [ ! -d ${GIT_REPOS} ]
-    then
-        echo "${GIT} clone for ${REMOTE_VERSION_FILE} FAILED"| tee -a ${LOG_FILE}
-        exit 1
-    fi
-    cd ${GIT_REPOS}
-    ${GIT} pull 2>&1 | tee -a ${LOG_FILE}
-    RELEASE_TOKEN=`${GIT} rev-list --tags --max-count=1`
-    RELEASE_NUMBER=`${GIT} describe --tags ${RELEASE_TOKEN}`
-    echo "<<<<<<<< Git output ends here "
-    echo ""
-else
-    FILE_TOKEN=`basename ${REMOTE_VERSION_FILE}`
-    LOCAL_VERSION_FILE=${PACKAGE_DOWNLOADS_BASE}/${FILE_TOKEN}
-    echo "-------------------------------------"
-    echo "Using Wget to Download the release version file"| tee -a ${LOG_FILE}
-    echo "File to download:${REMOTE_VERSION_FILE}"| tee -a ${LOG_FILE}
-    echo ""
-    echo ">>>>>>>> Wget output starts here "
-    ${WGET}  -O ${LOCAL_VERSION_FILE} ${REMOTE_VERSION_FILE} 2>&1 | tee -a ${LOG_FILE}
-    echo "<<<<<<<< Wget output ends here "
-    echo ""
-    if [ ! -f ${LOCAL_VERSION_FILE} ]
-    then
         echo "Download failed: ${LOCAL_VERSION_FILE} is missing" 
         exit 1
-    fi
-    EXPRESSION="$EXP_PREFIX ${LOCAL_VERSION_FILE}"
-    RELEASE_NUMBER=`${EXPRESSION} | grep "${VERSION_PREFIX}" |sed "s/${VERSION_PREFIX}//" `
-    [ "${VERSION_SUFFIX}" != "" ] && RELEASE_NUMBER=`echo ${RELEASE_NUMBER} | sed "s/${VERSION_SUFFIX}//"`
 fi
+EXPRESSION="$EXP_PREFIX ${LOCAL_VERSION_FILE}"
+RELEASE_NUMBER=`${EXPRESSION} | grep "${VERSION_PREFIX}" |sed "s/${VERSION_PREFIX}//" `
+[ "${VERSION_SUFFIX}" != "" ] && RELEASE_NUMBER=`echo ${RELEASE_NUMBER} | sed "s/${VERSION_SUFFIX}//"`
+
 echo "------------------------------"
 RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
 
