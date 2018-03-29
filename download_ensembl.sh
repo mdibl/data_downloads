@@ -77,9 +77,10 @@ echo "==" | tee -a ${LOG}
 set -f
 for taxonomy in ${TAXA}
 do
-   echo "$taxonomy"
+   
    for dataset in ${DATASETS}
    do
+       echo "$taxonomy}/${dataset}"
        REMOTE_DIR=${FTP_ROOT}/$RELEASE_DIR/${DATASETS_TYPE[$dataset]}
        REMOTE_FILE=$taxonomy}/${dataset}/${DATASETS[$dataset]}
        README_FILE=$taxonomy}/${dataset}/README
