@@ -82,7 +82,7 @@ do
    do
        echo "${taxonomy}/${dataset}"
        REMOTE_DIR=${FTP_ROOT}/$RELEASE_DIR/${DATASETS_TYPE[$dataset]}
-       if [ "${dataset}" = fasta ]
+       if [ "${DATASETS_TYPE[$dataset]}" = fasta ]
        then
             REMOTE_FILE=$taxonomy/${dataset}/${DATASETS[$dataset]}
             README_FILE=$taxonomy/${dataset}/README
