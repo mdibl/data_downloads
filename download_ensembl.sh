@@ -19,6 +19,7 @@ DATE=`date +"%B %d %Y"`
 DATE=`echo $DATE | sed -e 's/[[:space:]]/-/g'`
 
 WGET=`which wget`
+GLOBAL_CONFIG=Configuration
 #
 # Set path of files on local server
 if [ "${GLOBAL_CONFIG}" = "" ]
@@ -26,18 +27,28 @@ then
     echo "ERROR: global environment GLOBAL_CONFIG not set " 
     exit 1
 fi
-if [ "${PACKAGE_CONFIG_FILE}" = "" ]
+source ./${GLOBAL_CONFIG}
+
+SOURCE_NAME=ensembl
+PACKAGE_DOWNLOADS_BASE=${EXTERNAL_DATA_BASE}/${SOURCE_NAME}
+RELEASE_FILE=${PACKAGE_DOWNLOADS_BASE}/${CURRENT_FLAG_FILE}
+PACKAGE_CONFIG_FILE=${SOURCE_NAME}/${SOURCE_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
+
+
+if [ ! -f ${PACKAGE_CONFIG_FILE}]
 then
     echo "ERROR: global environment PACKAGE_CONFIG_FILE not set " 
     exit 1
 fi
-if [ "${PACKAGE_BASE}" = "" ]
+if [ ! -f ${RELEASE_FILE} ]
 then
-    echo "ERROR: global environment PACKAGE_BASE not set " 
-    exit 1
+   echo "Missing release flag file: ${RELEASE_FILE}"
+   exit 1
 fi
-source ./${GLOBAL_CONFIG}
+RELEASE_NUMBER=`cat ${RELEASE_FILE}`
 source ./${PACKAGE_CONFIG_FILE}
+
+PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR}
 
 LOG=${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${SHORT_NAME}.${RELEASE_DIR}.log
 WGET_COMMAND="${WGET_OPTIONS} '${REMOTE_URL}'"
