@@ -78,7 +78,7 @@ set -f
 for taxonomy in ${TAXA}
 do
    
-   for dataset in ${DATASETS}
+   for dataset in DATASETS
    do
        echo "$taxonomy}/${dataset}"
        REMOTE_DIR=${FTP_ROOT}/$RELEASE_DIR/${DATASETS_TYPE[$dataset]}
