@@ -59,16 +59,6 @@ then
   exit 1
 fi
 source ./${GLOBAL_CONFIG}
-
-#
-## Path relative to this script base
-PACKAGE_CONFIG_FILE=${SOURCE_NAME}/${SOURCE_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
-if [ ! -f ${PACKAGE_CONFIG_FILE} ]
-then
-    echo "ERROR: ${PACKAGE_CONFIG_FILE} missing under: ${WORKING_DIR}"
-    exit 1
-fi
-source ./${PACKAGE_CONFIG_FILE}
 #
 ## Path relative to this package install base
 PACKAGE_DOWNLOADS_BASE=${EXTERNAL_DATA_BASE}/${SOURCE_NAME}
@@ -102,6 +92,14 @@ fi
 RELEASE_NUMBER=`cat ${RELEASE_FILE}`
 echo "${SOURCE_NAME}'s Release version $RELEASE_NUMBER set in ${RELEASE_FILE}"| tee -a ${LOG_FILE}
 cd ${WORKING_DIR}
+#
+## Path relative to this script base
+PACKAGE_CONFIG_FILE=${SOURCE_NAME}/${SOURCE_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
+if [ ! -f ${PACKAGE_CONFIG_FILE} ]
+then
+    echo "ERROR: ${PACKAGE_CONFIG_FILE} missing under: ${WORKING_DIR}"
+    exit 1
+fi
 source ./${PACKAGE_CONFIG_FILE}
 echo ""
 if [ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ]
