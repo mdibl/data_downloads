@@ -73,8 +73,7 @@ echo "==" | tee -a ${LOG}
 echo "Local directory: ${PACKAGE_BASE}" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 [ ! -d ${PACKAGE_BASE} ] && mkdir --parents ${PACKAGE_BASE}
-(
-set -f
+
 for taxonomy in ${TAXA}
 do
    
@@ -89,7 +88,7 @@ do
    done
    
 done
-)
+
 echo "End Date:"`date` | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 echo ""
