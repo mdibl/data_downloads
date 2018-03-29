@@ -69,10 +69,6 @@ LOG_FILE="${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${SOURCE_NAME}.log"
 
 rm -rf ${LOG_FILE}
 touch ${LOG_FILE}
-
-## set release number to current value in ${RELEASE_FILE}
-[ -f ${RELEASE_FILE} ] &&  RELEASE_NUMBER=`cat ${RELEASE_FILE}`
-
 echo "------------------------------"
 RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
 
