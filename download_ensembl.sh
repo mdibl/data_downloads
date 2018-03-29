@@ -60,11 +60,6 @@ then
     echo "ERROR: global environment DOWNLOADS_LOG_DIR not set "  | tee -a ${LOG}   
     exit 1
 fi
-if [ "${REMOTE_URL}" = "" ]
-then
-    echo "ERROR: global environment REMOTE_URL not set "  | tee -a ${LOG}   
-    exit 1
-fi
 echo "==" | tee -a ${LOG}  
 echo "Start Date:"`date` | tee -a ${LOG}  
 echo "Package: ${SHORT_NAME} - ${RELEASE_DIR}"  | tee -a ${LOG}  
