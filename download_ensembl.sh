@@ -90,8 +90,7 @@ do
             REMOTE_FILE=$taxonomy/${DATASETS[$dataset]}
             README_FILE=$taxonomy/README
        fi
-       echo "Processing: ${REMOTE_FILE}"
-       echo " ${REMOTE_DIR}"
+       echo "Processing:${REMOTE_DIR}/${REMOTE_FILE}"
    done
    
 done
