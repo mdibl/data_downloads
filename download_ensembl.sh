@@ -90,7 +90,10 @@ do
             REMOTE_FILE=$taxonomy/${DATASETS[$dataset]}
             README_FILE=$taxonomy/README
        fi
-       echo "Processing:${REMOTE_DIR}/${REMOTE_FILE}"
+       REMOTE_URL=${REMOTE_SITE}${REMOTE_DIR}/${REMOTE_FILE}${ZIP_EXTENSION}
+       README_URL=${REMOTE_SITE}${REMOTE_DIR}/${README_FILE}
+       echo "Processing:${REMOTE_URL}"
+       echo "Processing:${README_URL}"
    done
    
 done
