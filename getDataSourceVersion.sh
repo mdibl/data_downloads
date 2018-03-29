@@ -96,7 +96,7 @@ touch ${LOG_FILE}
 
 ## set release number to current value in ${RELEASE_FILE}
 [ -f ${RELEASE_FILE} ] &&  RELEASE_NUMBER=`cat ${RELEASE_FILE}`
-echo "Checking ${TOOL_NAME}'s  Current Release"| tee -a ${LOG_FILE}
+echo "Checking ${SOURCE_NAME}'s  Current Release"| tee -a ${LOG_FILE}
 echo "The current version info is stored in  ${RELEASE_FILE}"| tee -a ${LOG_FILE}
 
 FILE_TOKEN=`basename ${REMOTE_VERSION_FILE}`
@@ -122,7 +122,7 @@ echo "------------------------------"
 RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
 
 ## Create the current release Number file
-echo "${TOOL_NAME} release: ${RELEASE_NUMBER}  detected"
+echo "${SOURCE_NAME} release: ${RELEASE_NUMBER}  detected"
 if [[ ${RELEASE_NUMBER} =~ ${REPOS_TAG_PATTERN} ]]
 then
    rm -f ${RELEASE_FILE}
@@ -139,9 +139,9 @@ echo ""
 if [ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ]
 then
     echo "WARNING"
-    echo "  ${TOOL_NAME} version $RELEASE_NUMBER is already installed."
+    echo "  ${SOURCE_NAME} version $RELEASE_NUMBER is already installed."
     echo "  See: ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} "
-    echo "  Remove this directory first if you want to re-install this version"
+    echo "  Remove this directory first if you want to re-downlaod this version"
 fi
 echo ""| tee -a ${LOG_FILE}
 echo "Program complete"| tee -a ${LOG_FILE}
