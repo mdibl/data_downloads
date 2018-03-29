@@ -73,22 +73,23 @@ echo "==" | tee -a ${LOG}
 echo "Local directory: ${PACKAGE_BASE}" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 [ ! -d ${PACKAGE_BASE} ] && mkdir --parents ${PACKAGE_BASE}
-
+(
+set -f
 for taxonomy in ${TAXA}
 do
    
-   for dataset in $DATASETS
+   for dataset in "${!DATASETS[@]}"
    do
        echo "${taxonomy}/${dataset}"
-       REMOTE_DIR=${FTP_ROOT}/$RELEASE_DIR/$DATASETS_TYPE[$dataset]
-       REMOTE_FILE=$taxonomy/${dataset}/$DATASETS[$dataset]
+       REMOTE_DIR=${FTP_ROOT}/$RELEASE_DIR/${DATASETS_TYPE[$dataset]}
+       REMOTE_FILE=$taxonomy/${dataset}/${DATASETS[$dataset]}
        README_FILE=$taxonomy/${dataset}/README
        echo "Processing: ${REMOTE_FILE}"
        echo " ${REMOTE_DIR}"
    done
    
 done
-
+)
 echo "End Date:"`date` | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 echo ""
