@@ -91,14 +91,24 @@ source ./${GLOBAL_CONFIG}
 [ ! -d ${DOWNLOADS_LOG_DIR} ] && mkdir -p ${DOWNLOADS_LOG_DIR}
 
 LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.${SOURCE_NAME}.log
-rm -f $LOG
-touch $LOG
-echo "==" | tee -a $LOG
-echo "Start Date:"`date` | tee -a $LOG
+rm -f ${LOG}
+touch ${LOG}
+echo "==" | tee -a ${LOG}
+echo "Start Date:"`date` | tee -a ${LOG}
 
-./${SOURCE_NAME}/download.sh  2>&1 | tee -a $LOG
+./${SOURCE_NAME}/download.sh  2>&1 | tee -a ${LOG}
 
-echo "Status: SUCCESS" | tee -a $LOG
+cd ${WORKING_DIR}
+
+source ./${SOURCE_NAME}/${SOURCE_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
+
+download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.${RELEASE_DIR}.log
+echo "== " | tee -a ${LOG}
+echo "Sanity Check on : ${download_log} " | tee -a ${LOG}
+
+download_status=getLogStatus ${download_log}
+
+echo "${download_status}" | tee -a $LOG
 echo "=="
 echo "End Date:"`date` | tee -a $LOG
 echo ""
