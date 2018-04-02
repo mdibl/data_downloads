@@ -110,7 +110,7 @@ download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.${RELEASE_DI
 echo "== " | tee -a ${LOG}
 echo "Sanity Check on : ${download_log} " | tee -a ${LOG}
 
-download_status=getLogStatus ${download_log}
+download_status=`getLogStatus ${download_log}`
 
 echo "${download_status}" | tee -a $LOG
 echo "=="
