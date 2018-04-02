@@ -102,6 +102,9 @@ echo "Start Date:"`date` | tee -a ${LOG}
 ./${SOURCE_NAME}/download.sh  2>&1 | tee -a ${LOG}
 
 cd ${WORKING_DIR}
+RELEASE_NUMBER=`cat ${RELEASE_FILE}`
+
+source ./${PACKAGE_CONFIG_FILE}
 
 download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.${RELEASE_DIR}.log
 echo "== " | tee -a ${LOG}
