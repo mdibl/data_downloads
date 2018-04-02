@@ -17,6 +17,40 @@ cd `dirname $0`
 WORKING_DIR=`pwd`
 SCRIPT_NAME=`basename $0`
 GLOBAL_CONFIG=Configuration
+echo "
+***************************************
+ BIOCORE External Data Download AUTOMATION 
+***************************************
+A package to create automations that downloads
+commonly used bioinformatics datasets. 
+"
+if [ $# -lt 1 ]
+then
+  echo "Usage: ./${SCRIPT_NAME} source_name"
+  echo "Example: ./${SCRIPT_NAME} ensembl"
+  displayTools
+  exit 1
+fi
+SOURCE_NAME=$1
+if [ ! -d ${SOURCE_NAME} ]
+then
+   echo "ERROR: No automation found for ${SOURCE_NAME}"
+   echo "Check the spelling or the case sensitive"
+   displayTools
+   exit 1
+fi
+##The config file is relative to
+# the root directory of package download 
+
+if [ ! -f ${GLOBAL_CONFIG} ]
+then
+  echo "'${GLOBAL_CONFIG}' file missing under `pwd`" 
+  echo "You must run the setup.sh script first to generate this file"
+  echo "Usage: ./setup.sh "
+  exit 1
+fi
+source ./${GLOBAL_CONFIG}
+
 #
 ## Diplays list of available external sources
 function displayTools() {
@@ -47,42 +81,6 @@ function getLogStatus() {
   done
   echo "Status: $rstatus" 
 }
-
-echo "
-***************************************
- BIOCORE External Data Download AUTOMATION 
-***************************************
-A package to create automations that downloads
-commonly used bioinformatics datasets. 
-"
-
-
-if [ $# -lt 1 ]
-then
-  echo "Usage: ./${SCRIPT_NAME} source_name"
-  echo "Example: ./${SCRIPT_NAME} ensembl"
-  displayTools
-  exit 1
-fi
-SOURCE_NAME=$1
-if [ ! -d ${SOURCE_NAME} ]
-then
-   echo "ERROR: No automation found for ${SOURCE_NAME}"
-   echo "Check the spelling or the case sensitive"
-   displayTools
-   exit 1
-fi
-##The config file is relative to
-# the root directory of package download 
-
-if [ ! -f ${GLOBAL_CONFIG} ]
-then
-  echo "'${GLOBAL_CONFIG}' file missing under `pwd`" 
-  echo "You must run the setup.sh script first to generate this file"
-  echo "Usage: ./setup.sh "
-  exit 1
-fi
-source ./${GLOBAL_CONFIG}
 # Create base directories if not exist
 # Make sure the directory is not empty or
 # the main root directory "/" 
