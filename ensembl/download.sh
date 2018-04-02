@@ -52,14 +52,12 @@ echo "==" | tee -a ${LOG}
 echo "Local directory: ${PACKAGE_BASE}" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 [ ! -d ${PACKAGE_BASE} ] && mkdir --parents ${PACKAGE_BASE}
-(
-set -f
+
 for taxonomy in ${TAXA}
 do
-   
    for dataset in "${!DATASETS[@]}"
    do
-       echo "${taxonomy}/${dataset}"
+       DOWNLOAD_DIR=${PACKAGE_BASE}/${taxonomy}/${dataset}
        REMOTE_DIR=${FTP_ROOT}/$RELEASE_DIR/${DATASETS_TYPE[$dataset]}
        if [ "${DATASETS_TYPE[$dataset]}" = fasta ]
        then
@@ -69,14 +67,17 @@ do
             REMOTE_FILE=$taxonomy/${DATASETS[$dataset]}
             README_FILE=$taxonomy/README
        fi
+       ## Download datasets
+       
        REMOTE_URL=${REMOTE_SITE}${REMOTE_DIR}/${REMOTE_FILE}${ZIP_EXTENSION}
+       echo "Downloading ${REMOTE_URL} under: ${DOWNLOAD_DIR}"
+       ./${MAIN_DOWNLOAD_SCRIPT} ${REMOTE_URL} ${DOWNLOAD_DIR}
+       ## Download the readme file associated with this dataset
        README_URL=${REMOTE_SITE}${REMOTE_DIR}/${README_FILE}
-       echo "Processing:${REMOTE_URL}"
-       echo "Processing:${README_URL}"
-   done
-   
+       ./${MAIN_DOWNLOAD_SCRIPT} ${README_URL} ${DOWNLOAD_DIR}
+   done 
 done
-)
+
 echo "End Date:"`date` | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 echo ""
