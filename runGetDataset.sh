@@ -1,5 +1,4 @@
 #!/bin/sh
-#!/bin/sh
 
 # Organization: MDIBL
 # Author: Lucie Hutchins
