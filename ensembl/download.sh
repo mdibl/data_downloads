@@ -36,7 +36,6 @@ source ./${PACKAGE_CONFIG}
 PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR}
 
 LOG=${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${SHORT_NAME}.${RELEASE_DIR}.log
-WGET_COMMAND="${WGET_OPTIONS} '${REMOTE_URL}'"
 rm -f ${LOG}
 touch ${LOG}
 if [ "${DOWNLOADS_LOG_DIR}" = "" ]
@@ -58,6 +57,8 @@ do
    for dataset in "${!DATASETS[@]}"
    do
        DOWNLOAD_DIR=${PACKAGE_BASE}/${taxonomy}/${dataset}
+       [  ! -d ${DOWNLOAD_DIR} ] && mkdir -p ${DOWNLOAD_DIR}
+       cd ${DOWNLOAD_DIR}
        REMOTE_DIR=${FTP_ROOT}/$RELEASE_DIR/${DATASETS_TYPE[$dataset]}
        if [ "${DATASETS_TYPE[$dataset]}" = fasta ]
        then
@@ -67,14 +68,22 @@ do
             REMOTE_FILE=$taxonomy/${DATASETS[$dataset]}
             README_FILE=$taxonomy/README
        fi
-       ## Download datasets
-       
+       ## Remote path to this dataset files
        REMOTE_URL=${REMOTE_SITE}${REMOTE_DIR}/${REMOTE_FILE}${ZIP_EXTENSION}
-       echo "Downloading ${REMOTE_URL} under: ${DOWNLOAD_DIR}"
-       ./${MAIN_DOWNLOAD_SCRIPT} ${REMOTE_URL} ${DOWNLOAD_DIR}
-       ## Download the readme file associated with this dataset
+       ## remote path to the readme file associated with this dataset
        README_URL=${REMOTE_SITE}${REMOTE_DIR}/${README_FILE}
-       ./${MAIN_DOWNLOAD_SCRIPT} ${README_URL} ${DOWNLOAD_DIR}
+       remote_file=`basename ${REMOTE_URL}`
+       echo "Downloading ${REMOTE_URL} under: ${DOWNLOAD_DIR}"
+       echo ">>>>>>>>${taxonomy}/${dataset wget output - start "
+       if [ "${IS_HTTP_PATTERN}" = true ]
+       then
+            ${WGET} ${WGET_OPTIONS} -A "${remote_file}" "${REMOTE_URL}/" 
+            ${WGET} ${WGET_OPTIONS} -A "${README_FILE}" "${REMOTE_URL}/" 
+       else
+            ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 
+            ${WGET}  ${WGET_OPTIONS} ${ README_URL} 
+       fi 
+       echo ">>>>>>>>${taxonomy}/${dataset wget output - send "
    done 
 done
 
