@@ -79,7 +79,7 @@ function getLogStatus() {
             echo "Found: \"$error_found\" "   
         fi
   done
-  echo "Status: $rstatus" 
+  echo "$rstatus" 
 }
 # Create base directories if not exist
 # Make sure the directory is not empty or
@@ -103,7 +103,6 @@ echo "Start Date:"`date` | tee -a ${LOG}
 
 cd ${WORKING_DIR}
 RELEASE_NUMBER=`cat ${RELEASE_FILE}`
-
 source ./${PACKAGE_CONFIG_FILE}
 
 download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.${RELEASE_DIR}.log
@@ -111,8 +110,13 @@ echo "== " | tee -a ${LOG}
 echo "Sanity Check on : ${download_log} " | tee -a ${LOG}
 
 download_status=`getLogStatus ${download_log}`
-
 echo "${download_status}" | tee -a $LOG
+if [ "${download_status}" == Success ]
+then
+   cd ${PACKAGE_DOWNLOADS_BASE}
+   rm -f current
+   ln -s ${RELEASE_DIR} current
+fi
 echo "=="
 echo "End Date:"`date` | tee -a $LOG
 echo ""
