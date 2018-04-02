@@ -25,7 +25,6 @@ UNZIP=`which unzip`
 
 #relative to this package base (data_downloads)
 GLOBAL_CONFIG=Configuration
-DOWNLOAD_SCRIPT=download_package.sh
 
 GET_SOURCE_VERSION_SCRIPT=getDataSourceVersion.sh
 SET_SOURCE_VERSION_SCRIPT=setDataSourceVersion.sh
@@ -33,7 +32,15 @@ GET_PACKAGE_MAIN_SCRIPT=runGetDataset.sh
 
 ## Relative to each bioformatics source base within this package
 PACKAGE_CONFIGFILE_SUFFIX=_package.cfg
+DOWNLOAD_SCRIPT=download.sh
 CURRENT_FLAG_FILE=current_release_NUMBER
+
+ERROR_TERMS=("Fatal"
+"Failure"
+"failed"
+"ERROR 404: Not Found"
+"timed out"
+"No such file or directory")
 
 #
 # Log directory base for this product
