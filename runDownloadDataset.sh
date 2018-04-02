@@ -18,7 +18,8 @@ cd `dirname $0`
 WORKING_DIR=`pwd`
 SCRIPT_NAME=`basename $0`
 GLOBAL_CONFIG=Configuration
-
+#
+## Diplays list of available external sources
 function displayTools() {
     echo ""
     echo " List of available tools"
@@ -29,6 +30,23 @@ function displayTools() {
        [ -d ${tool} ] && echo " ${tool}"
     done
     echo ""
+}
+## Checks logs for failure 
+function getLogStatus() {
+  log=$1
+  IFS=""
+  rstatus="Success"
+  for ((i = 0; i < ${#ERROR_TERMS[@]}; i++))
+  do
+       error_term=${ERROR_TERMS[$i]}
+       error_found=`grep -i $error_term $log `
+       if [ "$error_found" != "" ]
+       then
+            rstatus="Failure"
+            echo "Found: \"$error_found\" "   
+        fi
+  done
+  echo "Status: $rstatus" 
 }
 
 echo "
