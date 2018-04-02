@@ -17,6 +17,19 @@ cd `dirname $0`
 WORKING_DIR=`pwd`
 SCRIPT_NAME=`basename $0`
 GLOBAL_CONFIG=Configuration
+#
+## Diplays list of available external sources
+function displayTools() {
+    echo ""
+    echo " List of available tools"
+    echo "----------------------------"
+    tools="`ls`"
+    for tool in ${tools}
+    do
+       [ -d ${tool} ] && echo " ${tool}"
+    done
+    echo ""
+}
 echo "
 ***************************************
  BIOCORE External Data Download AUTOMATION 
@@ -51,19 +64,6 @@ then
 fi
 source ./${GLOBAL_CONFIG}
 
-#
-## Diplays list of available external sources
-function displayTools() {
-    echo ""
-    echo " List of available tools"
-    echo "----------------------------"
-    tools="`ls`"
-    for tool in ${tools}
-    do
-       [ -d ${tool} ] && echo " ${tool}"
-    done
-    echo ""
-}
 ## Checks logs for failure 
 function getLogStatus() {
   log=$1
