@@ -103,9 +103,9 @@ echo "Start Date:"`date` | tee -a ${LOG}
 
 cd ${WORKING_DIR}
 
-source ./${SOURCE_NAME}/${SOURCE_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
+source ./${PACKAGE_CONFIG_FILE}
 
-download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.${RELEASE_DIR}.log
+download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.${RELEASE_NUMBER}.log
 echo "== " | tee -a ${LOG}
 echo "Sanity Check on : ${download_log} " | tee -a ${LOG}
 
