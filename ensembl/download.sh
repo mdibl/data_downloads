@@ -74,9 +74,9 @@ do
        README_URL=${REMOTE_SITE}${REMOTE_DIR}/${README_FILE}
        remote_file=`basename ${REMOTE_URL}`
        echo "Downloading ${REMOTE_URL} under: ${DOWNLOAD_DIR}"
-       echo " >>>>>>>>${taxonomy}/${dataset wget output - start "
+       echo " >>>>>>>>${taxonomy}/${dataset wget output - start"
        
-       if [ "${IS_HTTP_PATTERN}" == true ]
+       if [ "${IS_HTTP_PATTERN}" = true ]
        then
             ${WGET} ${WGET_OPTIONS} -A "${remote_file}" "${REMOTE_URL}/" 
             ${WGET} ${WGET_OPTIONS} -A "${README_FILE}" "${REMOTE_URL}/" 
