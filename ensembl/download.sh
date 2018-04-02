@@ -85,7 +85,7 @@ do
             ${WGET} ${WGET_OPTIONS} -A ${README_FILE} "${REMOTE_URL}/" 
        else
             ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 
-            ${WGET}  ${WGET_OPTIONS} ${ README_URL} 
+            ${WGET}  ${WGET_OPTIONS} ${README_URL} 
        fi 
       
        
