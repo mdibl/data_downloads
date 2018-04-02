@@ -25,6 +25,7 @@ UNZIP=`which unzip`
 
 #relative to this package base (data_downloads)
 GLOBAL_CONFIG=Configuration
+MAIN_DOWNLOAD_SCRIPT=download_package.sh
 
 GET_SOURCE_VERSION_SCRIPT=getDataSourceVersion.sh
 SET_SOURCE_VERSION_SCRIPT=setDataSourceVersion.sh
