@@ -51,7 +51,8 @@ echo "==" | tee -a ${LOG}
 echo "Local directory: ${PACKAGE_BASE}" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 [ ! -d ${PACKAGE_BASE} ] && mkdir --parents ${PACKAGE_BASE}
-
+(
+set -f 
 for taxonomy in ${TAXA}
 do
    for dataset in "${!DATASETS[@]}"
@@ -73,8 +74,9 @@ do
        ## remote path to the readme file associated with this dataset
        README_URL=${REMOTE_SITE}${REMOTE_DIR}/${README_FILE}
        remote_file=`basename ${REMOTE_URL}`
+       
        echo "Downloading ${REMOTE_URL} under: ${DOWNLOAD_DIR}"
-       echo " >>>>>>>>${taxonomy}/${dataset wget output - start"
+       echo " ${taxonomy}/${dataset wget output - start  "
        
        if [ "${IS_HTTP_PATTERN}" = true ]
        then
@@ -84,10 +86,10 @@ do
             ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 
             ${WGET}  ${WGET_OPTIONS} ${ README_URL} 
        fi 
-       echo ">>>>>>>>${taxonomy}/${dataset wget output - send "
+       echo "${taxonomy}/${dataset wget output - end "
    done 
 done
-
+)
 echo "End Date:"`date` | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 echo ""
