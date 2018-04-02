@@ -53,13 +53,16 @@ echo "==" | tee -a ${LOG}
 [ ! -d ${PACKAGE_BASE} ] && mkdir --parents ${PACKAGE_BASE}
 (
 set -f 
-for taxonomy in ${TAXA}
+for taxonomy in "${TAXA}"
 do
+
    for dataset in "${!DATASETS[@]}"
    do
        DOWNLOAD_DIR=${PACKAGE_BASE}/${taxonomy}/${dataset}
+       
        [  ! -d ${DOWNLOAD_DIR} ] && mkdir -p ${DOWNLOAD_DIR}
        cd ${DOWNLOAD_DIR}
+       
        REMOTE_DIR=${FTP_ROOT}/$RELEASE_DIR/${DATASETS_TYPE[$dataset]}
        if [ "${DATASETS_TYPE[$dataset]}" = fasta ]
        then
@@ -87,6 +90,7 @@ do
             ${WGET}  ${WGET_OPTIONS} ${ README_URL} 
        fi 
        echo "${taxonomy}/${dataset wget output - end "
+       
    done 
 done
 )
