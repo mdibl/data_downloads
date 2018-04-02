@@ -51,7 +51,10 @@ echo "==" | tee -a ${LOG}
 echo "Local directory: ${PACKAGE_BASE}" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 [ ! -d ${PACKAGE_BASE} ] && mkdir --parents ${PACKAGE_BASE}
-for taxonomy in "${TAXA}"
+
+(
+set -f
+for taxonomy in ${TAXA}
 do
 
    for dataset in "${!DATASETS[@]}"
@@ -88,7 +91,7 @@ do
        
    done 
 done
-
+)
 echo "End Date:`date`" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 echo ""
