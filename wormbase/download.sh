@@ -51,34 +51,19 @@ echo "==" | tee -a ${LOG}
 echo "Local directory: ${PACKAGE_BASE}" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 [ ! -d ${PACKAGE_BASE} ] && mkdir --parents ${PACKAGE_BASE}
-
 (
 set -f
 for taxonomy in ${TAXA}
 do
-
    for dataset in "${!DATASETS[@]}"
    do
-       DOWNLOAD_DIR=${PACKAGE_BASE}/${taxonomy}/${dataset}
-       
+       DOWNLOAD_DIR=${PACKAGE_BASE}/${SPECIES_DIR}/${taxonomy}
        mkdir -p ${DOWNLOAD_DIR}
        cd ${DOWNLOAD_DIR}
-       
-       REMOTE_DIR=${FTP_ROOT}/$RELEASE_DIR/${DATASETS_TYPE[$dataset]}
-       if [ "${DATASETS_TYPE[$dataset]}" = fasta ]
-       then
-            REMOTE_FILE=$taxonomy/${dataset}/${DATASETS[$dataset]}
-            README_FILE=$taxonomy/${dataset}/README
-       else
-            REMOTE_FILE=$taxonomy/${DATASETS[$dataset]}
-            README_FILE=$taxonomy/README
-       fi
+       REMOTE_FILE=${SPECIES_DIR}/$taxonomy/${DATASETS[$dataset]}
        ## Remote path to this dataset files
        REMOTE_URL=${REMOTE_SITE}${REMOTE_DIR}/${REMOTE_FILE}${ZIP_EXTENSION}
-       ## remote path to the readme file associated with this dataset
-       README_URL=${REMOTE_SITE}${REMOTE_DIR}/${README_FILE}
        remote_file=`basename ${REMOTE_URL}`
-       
        if [ "${IS_HTTP_PATTERN}" = true ]
        then
             ${WGET} ${WGET_OPTIONS} -A ${remote_file} "${REMOTE_URL}/" 
@@ -92,6 +77,30 @@ do
    done 
 done
 )
+if [ "${ONTOLOGY}" != "" ]
+then
+   cd ${PACKAGE_BASE}
+   mkdir -p ${ONTOLOGY_DIR}
+   cd ${ONTOLOGY_DIR}
+   (
+   set -f
+      for annotation in "${!ONTOLOGY[@]}"
+      do
+          REMOTE_FILE=${ONTOLOGY_DIR}/${ONTOLOGY[$annotation]}
+          ## Remote path to this dataset files
+          REMOTE_URL=${REMOTE_SITE}${REMOTE_DIR}/${REMOTE_FILE}
+          remote_file=`basename ${REMOTE_URL}`
+          if [ "${IS_HTTP_PATTERN}" = true ]
+          then
+               ${WGET} ${WGET_OPTIONS} -A ${remote_file} "${REMOTE_URL}/" 
+               ${WGET} ${WGET_OPTIONS} -A ${README_FILE} "${REMOTE_URL}/" 
+          else
+               ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 
+               ${WGET}  ${WGET_OPTIONS} ${README_URL} 
+          fi 
+      done
+   )
+fi
 echo "End Date:`date`" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 echo ""
