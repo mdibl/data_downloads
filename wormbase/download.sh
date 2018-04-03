@@ -67,10 +67,8 @@ do
        if [ "${IS_HTTP_PATTERN}" = true ]
        then
             ${WGET} ${WGET_OPTIONS} -A ${remote_file} "${REMOTE_URL}/" 
-            ${WGET} ${WGET_OPTIONS} -A ${README_FILE} "${REMOTE_URL}/" 
        else
             ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 
-            ${WGET}  ${WGET_OPTIONS} ${README_URL} 
        fi 
       
        
@@ -92,11 +90,9 @@ then
           remote_file=`basename ${REMOTE_URL}`
           if [ "${IS_HTTP_PATTERN}" = true ]
           then
-               ${WGET} ${WGET_OPTIONS} -A ${remote_file} "${REMOTE_URL}/" 
-               ${WGET} ${WGET_OPTIONS} -A ${README_FILE} "${REMOTE_URL}/" 
+               ${WGET} ${WGET_OPTIONS} -A ${remote_file} "${REMOTE_URL}/"  
           else
                ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 
-               ${WGET}  ${WGET_OPTIONS} ${README_URL} 
           fi 
       done
    )
