@@ -99,8 +99,7 @@ touch ${LOG_FILE}
 echo "Checking ${SOURCE_NAME}'s  Current Release"| tee -a ${LOG_FILE}
 echo "The current version info is stored in  ${RELEASE_FILE}"| tee -a ${LOG_FILE}
 
-FILE_TOKEN=`basename ${REMOTE_VERSION_FILE}`
-LOCAL_VERSION_FILE=${PACKAGE_DOWNLOADS_BASE}/${FILE_TOKEN}
+LOCAL_VERSION_FILE=${PACKAGE_DOWNLOADS_BASE}/${README_FILE}
 echo "-------------------------------------"
 echo "Using Wget to Download the release version file"| tee -a ${LOG_FILE}
 echo "File to download:${REMOTE_VERSION_FILE}"| tee -a ${LOG_FILE}
