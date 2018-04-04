@@ -30,6 +30,7 @@ MAIN_DOWNLOAD_SCRIPT=download_package.sh
 GET_SOURCE_VERSION_SCRIPT=getDataSourceVersion.sh
 SET_SOURCE_VERSION_SCRIPT=setDataSourceVersion.sh
 GET_PACKAGE_MAIN_SCRIPT=runGetDataset.sh
+UNZIP_FILES_SCRIPT=unzipFasta.sh
 
 ## Relative to each bioformatics source base within this package
 PACKAGE_CONFIGFILE_SUFFIX=_package.cfg
