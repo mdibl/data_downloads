@@ -71,14 +71,14 @@ do
      rm -rf temp 
      ## Create the joined transcriptome 
      #
-     if [ -d $SCRATCH_DIR/$project-mRNA_transcripts ]
+     if [ -d $SCRATCH_DIR/${organism}-${MRNA_TR} ]
      then
-         if [ -d $SCRATCH_DIR/$project-ncRNA_transcripts ]
+         if [ -d $SCRATCH_DIR/${organism}-${NCRNA_TR} ]
          then
-             joined_dir=$SCRATCH_DIR/$project-transcriptome_joined
+             joined_dir=$SCRATCH_DIR/${organism}-transcriptome_joined
              [ ! -d $joined_dir ] && mkdir $joined_dir
              joined_file=$joined_dir/$project-joined.fa
-             cat $SCRATCH_DIR/$project-mRNA_transcripts/*.mRNA_transcripts.fa $SCRATCH_DIR/$project-ncRNA_transcripts/*.ncRNA_transcripts.fa > $joined_file
+             cat $SCRATCH_DIR/${organism}-${MRNA_TR}/*.${MRNA_TR}.fa $SCRATCH_DIR/${organism}-${NCRNA_TR}/*.${NCRNA_TR}.fa > $joined_file
           fi
     fi
   done
