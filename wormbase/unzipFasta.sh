@@ -10,7 +10,7 @@
 # then by organism.project-dataset
 #
 # Example under  /data/scratch/wormbase-WS261/
-# c_elegans.PRJNA13758-genomic 
+#
 # This script is called by the download manager script.
 # Assumption: all the expected environment variables have been
 # sourced by the caller.
