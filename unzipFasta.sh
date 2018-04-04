@@ -63,6 +63,7 @@ do
   do
      dataset_dir=${SCRATCH_DIR}/${organism}-${dataset}
      FASTA_FILES=`ls ${organism_dir} | grep ${dataset}${ZIP_EXTENSION}`
+     echo "Unzipping ${organism_dir}/${dataset}${ZIP_EXTENSION} dataset under `pwd`" 
      ## Next if this project does not include this dataset
      [ -z "${FASTA_FILES}"  ] && continue 
      mkdir -p ${dataset_dir}
