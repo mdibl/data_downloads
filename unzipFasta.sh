@@ -58,11 +58,10 @@ do
      echo "ERROR: Missing directory $organism_dir"
      exit 1
   fi
-  for dataset in "${!DATASETS[@]}"
+  for dataset in "${!DATASETS_PATTERN[@]}"
   do
      dataset_dir=${SCRATCH_DIR}/${organism}-${dataset}
-     dataset_file=${DATASETS[$dataset]}${ZIP_EXTENSION}
-     FASTA_FILES=`ls ${organism_dir} | grep "${dataset_file}"`
+     FASTA_FILES=`ls ${organism_dir} | grep ${DATASETS_PATTERN[$dataset]} | grep ${ZIP_EXTENSION} `
      [ -z "${FASTA_FILES}"  ] && continue 
      mkdir -p ${dataset_dir}
      cd ${dataset_dir}
