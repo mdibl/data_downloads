@@ -58,16 +58,13 @@ do
      DOWNLOAD_DIR=${PACKAGE_BASE}/${SPECIES_DIR}/${taxonomy}
      mkdir -p ${DOWNLOAD_DIR}
      cd ${DOWNLOAD_DIR}
-     REMOTE_FILE=${SPECIES_DIR}/$taxonomy/*
-     ## Remote path to this dataset files
-     REMOTE_URL=${REMOTE_SITE}${REMOTE_DIR}/${REMOTE_FILE}
-     remote_file=`basename ${REMOTE_URL}`
-     if [ "${IS_HTTP_PATTERN}" = true ]
-     then
-            ${WGET} ${WGET_OPTIONS} -A ${remote_file} "${REMOTE_URL}/" 
-     else
-            ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 
-     fi 
+     for dataset in "${!DATASETS[@]}"
+     do
+         REMOTE_FILE=${SPECIES_DIR}/$taxonomy/*/${DATASETS[$dataset]}
+         ## Remote path to this dataset files
+         REMOTE_URL=${REMOTE_SITE}${REMOTE_DIR}/${REMOTE_FILE}
+         ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 
+     done
 done
 )
 
