@@ -50,6 +50,7 @@ PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}/${ORGANISMS_DOWNLOAD_DIR}
 
 [ ! -d ${SCRATCH_DIR} ] && mkdir -p ${SCRATCH_DIR}
 cd ${SCRATCH_DIR}
+echo "Unzipping fasta from `pwd`"
 for organism in ${TAXA}
 do
   organism_dir=${PACKAGE_BASE}/${organism}
