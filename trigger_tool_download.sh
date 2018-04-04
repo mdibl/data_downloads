@@ -68,12 +68,12 @@ source ./${GLOBAL_CONFIG}
 ## Update the release flag file
 if [ $# -lt 2 ]
 then 
-    echo "Running cmd: ./${GET_TOOL_VERSION_SCRIPT} ${SOURCE_NAME}  -- from `pwd`"
-    ./${GET_TOOL_VERSION_SCRIPT} ${SOURCE_NAME}
+    echo "Running cmd: ./${GET_SOURCE_VERSION_SCRIPT} ${SOURCE_NAME}  -- from `pwd`"
+    ./${GET_SOURCE_VERSION_SCRIPT} ${SOURCE_NAME}
 else
     SOURCE_VERSION=$2
-    echo "Running cmd:  ./{SET_TOOL_VERSION_SCRIPT}  ${SOURCE_NAME} ${SOURCE_VERSION}  -- from `pwd` "
-    ./${SET_TOOL_VERSION_SCRIPT}  ${SOURCE_NAME} ${TSOURCE_VERSION}
+    echo "Running cmd:  ./{SET_SOURCE_VERSION_SCRIPT}  ${SOURCE_NAME} ${SOURCE_VERSION}  -- from `pwd` "
+    ./${SET_SOURCE_VERSION_SCRIPT}  ${SOURCE_NAME} ${SOURCE_VERSION}
 fi
 if [ $? -ne 0 ]
 then
@@ -81,7 +81,7 @@ then
     exit 1
 fi
 
-PACKAGE_DOWNLOADS_BASE=${EXTERNAL_SOFTWARE_BASE}/${SOURCE_NAME}
+PACKAGE_DOWNLOADS_BASE=${EXTERNAL_DATA_BASE}/${SOURCE_NAME}
 RELEASE_FILE=${PACKAGE_DOWNLOADS_BASE}/${CURRENT_FLAG_FILE}
 if [ ! -f ${RELEASE_FILE} ]
 then
@@ -90,7 +90,7 @@ then
 fi
 RELEASE_NUMBER=`cat ${RELEASE_FILE}`
 
-PACKAGE_CONFIG_FILE=${TOOL_NAME}/${TOOL_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
+PACKAGE_CONFIG_FILE=${SOURCE_NAME}/${SOURCE_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
 if [ ! -f ${PACKAGE_CONFIG_FILE} ]
 then
   echo "${SOURCE_NAME}'S confifiguration file: '${PACKAGE_CONFIG_FILE}' missing under `pwd`" 
@@ -100,7 +100,7 @@ fi
 source ./${PACKAGE_CONFIG_FILE}
 [ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ] && exit 1
 
-## Run the main install script to install the version of the tool found in current_release file 
+## Run the main download script to get the version  found in current_release file 
 echo "Running cmd: ./${GET_PACKAGE_MAIN_SCRIPT} ${SOURCE_NAME}  -- from `pwd`"
 ./${GET_PACKAGE_MAIN_SCRIPT} ${SOURCE_NAME}
 
@@ -109,5 +109,3 @@ then
     echo "Cmd Status: FAILED"
     exit 1
 fi
-
-
