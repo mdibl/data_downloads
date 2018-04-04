@@ -61,8 +61,8 @@ do
   for dataset in "${!DATASETS[@]}"
   do
      dataset_dir=${SCRATCH_DIR}/${organism}-${dataset}
-     dataset_file=${dataset}.fa${ZIP_EXTENSION}
-     FASTA_FILES=`ls ${organism_dir} | grep ${dataset_file}`
+     dataset_file=${DATASETS[$dataset]}${ZIP_EXTENSION}
+     FASTA_FILES=`ls ${organism_dir} | grep "${dataset_file}"`
      [ -z "${FASTA_FILES}"  ] && continue 
      mkdir -p ${dataset_dir}
      cd ${dataset_dir}
