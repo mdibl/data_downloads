@@ -63,8 +63,6 @@ do
      dataset_dir=${SCRATCH_DIR}/${organism}-${dataset}
      dataset_file=${dataset}.fa${ZIP_EXTENSION}
      FASTA_FILES=`ls ${organism_dir} | grep ${dataset_file}`
-     echo "Unzipping ${organism_dir}/*${dataset_file} dataset under `pwd`" 
-     ## Next if this project does not include this dataset
      [ -z "${FASTA_FILES}"  ] && continue 
      mkdir -p ${dataset_dir}
      cd ${dataset_dir}
@@ -80,8 +78,8 @@ do
         fi
      done
      rm -rf temp 
-     ## Create the joined transcriptome 
-     #
+     ## Create the joined transcriptome by combining 
+     # mRNA and ncRNA transcripts
      if [ -d $SCRATCH_DIR/${organism}-${MRNA_TR} ]
      then
          if [ -d $SCRATCH_DIR/${organism}-${NCRNA_TR} ]
