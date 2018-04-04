@@ -20,20 +20,30 @@ SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
 GUNZIP=`which  gunzip`
 
-PACKAGE_CONFIG=`basename ${PACKAGE_CONFIG_FILE}`
-if [ ! -f ${PACKAGE_CONFIG} ]
+if [ ! -f ${GLOBAL_CONFIG} ]
 then
-    echo "ERROR: global environment PACKAGE_CONFIG_FILE missing from `pwd` " 
+  echo "ERROR: global environment GLOBAL_CONFIG not set by the caller" 
+  exit 1
+fi
+if [ ! -d ${PACKAGE_DOWNLOADS_BASE} ]
+then
+  echo "ERROR: global environment PACKAGE_DOWNLOADS_BASE not set by the caller" 
+  exit 1
+fi
+if [ ! -f ${PACKAGE_CONFIG_FILE} ]
+then
+    echo "ERROR: global environment PACKAGE_CONFIG_FILE not set by the caller " 
     exit 1
 fi
 if [ ! -f ${RELEASE_FILE} ]
 then
-   echo "Missing release flag file: ${RELEASE_FILE}"
+   echo "ERROR: global environment RELEASE_FILE not set by the caller"
    exit 1
 fi
-RELEASE_NUMBER=`cat ${RELEASE_FILE} | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
 
-source ./${PACKAGE_CONFIG}
+RELEASE_NUMBER=`cat ${RELEASE_FILE} | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
+source ./${GLOBAL_CONFIG}
+source ./${PACKAGE_CONFIG_FILE}
 
 SCRATCH_DIR=${SCRATCH_DATA_BASE}/${SHORT_NAME}-${RELEASE_NUMBER}
 PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}/${ORGANISMS_DOWNLOAD_DIR}
