@@ -77,20 +77,20 @@ do
               ${GUNZIP} ${fasta_file}
         fi
      done
-     rm -rf temp 
-     ## Create the joined transcriptome by combining 
-     # mRNA and ncRNA transcripts
-     if [ -d $SCRATCH_DIR/${organism}-${MRNA_TR} ]
-     then
-         if [ -d $SCRATCH_DIR/${organism}-${NCRNA_TR} ]
-         then
-             joined_dir=$SCRATCH_DIR/${organism}-transcriptome_joined
-             [ ! -d $joined_dir ] && mkdir $joined_dir
-             joined_file=$joined_dir/${organism}-transcriptome-joined.fa
-             cat $SCRATCH_DIR/${organism}-${MRNA_TR}/*.${MRNA_TR}.fa $SCRATCH_DIR/${organism}-${NCRNA_TR}/*.${NCRNA_TR}.fa > $joined_file
-          fi
-    fi
+     rm -rf temp  
   done
+  ## Create the joined transcriptome by combining 
+  # mRNA and ncRNA transcripts
+  if [ -d $SCRATCH_DIR/${organism}-${MRNA_TR} ]
+  then
+      if [ -d $SCRATCH_DIR/${organism}-${NCRNA_TR} ]
+      then
+          joined_dir=$SCRATCH_DIR/${organism}-transcriptome_joined
+          [ ! -d $joined_dir ] && mkdir $joined_dir
+          joined_file=$joined_dir/${organism}-transcriptome-joined.fa
+          cat $SCRATCH_DIR/${organism}-${MRNA_TR}/*.${MRNA_TR}.fa $SCRATCH_DIR/${organism}-${NCRNA_TR}/*.${NCRNA_TR}.fa > $joined_file
+      fi
+  fi
 done
 
 echo ""
