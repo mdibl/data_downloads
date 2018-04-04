@@ -60,7 +60,7 @@ do
      cd ${DOWNLOAD_DIR}
      REMOTE_FILE=${SPECIES_DIR}/$taxonomy/*
      ## Remote path to this dataset files
-     REMOTE_URL=${REMOTE_SITE}${REMOTE_DIR}/${REMOTE_FILE}${ZIP_EXTENSION}
+     REMOTE_URL=${REMOTE_SITE}${REMOTE_DIR}/${REMOTE_FILE}
      remote_file=`basename ${REMOTE_URL}`
      if [ "${IS_HTTP_PATTERN}" = true ]
      then
