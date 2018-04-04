@@ -2,7 +2,7 @@
 
 # Organization: MDIBL
 # Author: Lucie Hutchins
-# Date:  January 2018
+# Date:  April 2018
 #
 # This script unzip the newly downloaded fasta
 # files under the /data/scratch directory.
@@ -17,7 +17,7 @@ cd `dirname $0`
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
 RELEASE_NUMBER=0
-
+export PACKAGE_CONFIG_FILE PACKAGE_DOWNLOADS_BASE RELEASE_FILE DOWNLOADS_LOG_DIR MAIN_DOWNLOAD_SCRIPT
 if [ $# -lt 1 ]
 then 
   echo "****************************************"
