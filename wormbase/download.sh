@@ -70,28 +70,26 @@ do
      fi 
 done
 )
-if [ "${ONTOLOGY}" != "" ]
-then
-   cd ${PACKAGE_BASE}
-   mkdir -p ${ONTOLOGY_DIR}
-   cd ${ONTOLOGY_DIR}
-   (
-   set -f
-      for annotation in "${!ONTOLOGY[@]}"
-      do
-          REMOTE_FILE=${ONTOLOGY_DIR}/${ONTOLOGY[$annotation]}
-          ## Remote path to this dataset files
-          REMOTE_URL=${REMOTE_SITE}${REMOTE_DIR}/${REMOTE_FILE}
-          remote_file=`basename ${REMOTE_URL}`
-          if [ "${IS_HTTP_PATTERN}" = true ]
-          then
-               ${WGET} ${WGET_OPTIONS} -A ${remote_file} "${REMOTE_URL}/"  
-          else
-               ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 
-          fi 
-      done
-   )
-fi
+
+cd ${PACKAGE_BASE}
+mkdir -p ${ONTOLOGY_DIR}
+cd ${ONTOLOGY_DIR}
+(
+set -f
+for annotation in "${!ONTOLOGY[@]}"
+do
+    REMOTE_FILE=${ONTOLOGY_DIR}/${ONTOLOGY[$annotation]}
+    ## Remote path to this dataset files
+    REMOTE_URL=${REMOTE_SITE}${REMOTE_DIR}/${REMOTE_FILE}
+    remote_file=`basename ${REMOTE_URL}`
+    if [ "${IS_HTTP_PATTERN}" = true ]
+    then
+         ${WGET} ${WGET_OPTIONS} -A ${remote_file} "${REMOTE_URL}/"  
+    else
+         ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 
+    fi 
+done
+)
 echo "End Date:`date`" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 echo ""
