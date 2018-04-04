@@ -92,7 +92,7 @@ do
       fi
   fi
   #Create the mega file if this is dna dataset
-  if [ "${GEN_MEGA_CHROMOSOME}" ==true ]
+  if [ "${GEN_MEGA_CHROMOSOME}" == true ]
   then
        genome_dir=${SCRATCH_DIR}/${organism}-genome
        [ ! -d ${genome_dir} ] && mkdir ${genome_dir}
