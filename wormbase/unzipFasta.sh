@@ -56,7 +56,7 @@ do
      [ -z "${FASTA_FILES}"  ] && continue 
      mkdir -p ${dataset_dir}
      cd ${dataset_dir}
-     echo "Unzipping ${organism_dir/${dataset}${ZIP_EXTENSION} dataset under `pwd`" 
+     echo "Unzipping ${organism_dir}/${dataset}${ZIP_EXTENSION} dataset under `pwd`" 
      [ ! -d temp ] && mkdir temp
      OLD_FASTAS=`ls | grep .fa`
      [ -n "${OLD_FASTAS}" ] && mv *.fa temp
