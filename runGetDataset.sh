@@ -111,11 +111,16 @@ echo "Sanity Check on : ${download_log} " | tee -a ${LOG}
 
 download_status=`getLogStatus ${download_log}`
 echo "${download_status}" | tee -a $LOG
-if [ "${download_status}" == Success ]
+[ "${download_status}" != Success ] && exit 1
+
+## update the symbolic link to point to the lasted download version
+cd ${PACKAGE_DOWNLOADS_BASE}
+rm -f current
+ln -s ${RELEASE_DIR} current
+cd ${WORKING_DIR}
+if [ "${UNZIP_FILES}" == true ]
 then
-   cd ${PACKAGE_DOWNLOADS_BASE}
-   rm -f current
-   ln -s ${RELEASE_DIR} current
+  ./${UNZIP_FILES_SCRIPT}
 fi
 echo "=="
 echo "End Date:"`date` | tee -a $LOG
