@@ -21,6 +21,7 @@ DATA_DOWNLOADS_BASE=`realpath $WORKING_DIR`
 WGET=`which wget`
 TAR=`which tar`
 UNZIP=`which unzip`
+GUNZIP=`which gunzip`
 
 
 #relative to this package base (data_downloads)
