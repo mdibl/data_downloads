@@ -50,7 +50,6 @@ PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}/${ORGANISMS_DOWNLOAD_DIR}
 
 [ ! -d ${SCRATCH_DIR} ] && mkdir -p ${SCRATCH_DIR}
 cd ${SCRATCH_DIR}
-echo "Unzipping fasta from `pwd`"
 for organism in ${TAXA}
 do
   organism_dir=${PACKAGE_BASE}/${organism}
@@ -62,13 +61,13 @@ do
   for dataset in "${!DATASETS[@]}"
   do
      dataset_dir=${SCRATCH_DIR}/${organism}-${dataset}
-     FASTA_FILES=`ls ${organism_dir} | grep ${dataset}${ZIP_EXTENSION}`
-     echo "Unzipping ${organism_dir}/${dataset}${ZIP_EXTENSION} dataset under `pwd`" 
+     dataset_file=${DATASETS[$dataset]}${ZIP_EXTENSION}
+     FASTA_FILES=`ls ${organism_dir} | grep ${dataset_file}`
+     echo "Unzipping ${organism_dir}/${dataset_file} dataset under `pwd`" 
      ## Next if this project does not include this dataset
      [ -z "${FASTA_FILES}"  ] && continue 
      mkdir -p ${dataset_dir}
      cd ${dataset_dir}
-     echo "Unzipping ${organism_dir}/${dataset}${ZIP_EXTENSION} dataset under `pwd`" 
      [ ! -d temp ] && mkdir temp
      OLD_FASTAS=`ls | grep .fa`
      [ -n "${OLD_FASTAS}" ] && mv *.fa temp
