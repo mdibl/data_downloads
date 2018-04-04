@@ -92,12 +92,12 @@ do
       fi
   fi
   #Create the mega file if this is dna dataset
-  if [ -d ${SCRATCH_DIR}/${organism}-dna ]
+  if [ "${GEN_MEGA_CHROMOSOME}" ==true ]
   then
        genome_dir=${SCRATCH_DIR}/${organism}-genome
        [ ! -d ${genome_dir} ] && mkdir ${genome_dir}
        genome_file=${genome_dir}/${organism}.genome.fa
-       [ ! -f ${genome_file} ] && cat ${SCRATCH_DIR}/${organism}-dna/*.dna.chromosome.*.fa > ${genome_file }
+       [ ! -f ${genome_file} ] && cat ${SCRATCH_DIR}/${organism}-${CHROMOSOMES_DATASET}/${CHROMOSOMES} > ${genome_file }
   fi
 done
 
