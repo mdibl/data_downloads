@@ -61,7 +61,9 @@ do
   for dataset in "${!DATASETS_PATTERN[@]}"
   do
      dataset_dir=${SCRATCH_DIR}/${organism}-${dataset}
-     FASTA_FILES=`ls ${organism_dir} | grep ${DATASETS_PATTERN[$dataset]} | grep ${ZIP_EXTENSION} `
+     organism_dataset_base=${organism_dir}
+     [ -d ${organism_dir}/${dataset} ] && organism_dataset_base=${organism_dir}/${dataset}
+     FASTA_FILES=`ls ${organism_dataset_base} | grep ${DATASETS_PATTERN[$dataset]} | grep ${ZIP_EXTENSION} `
      [ -z "${FASTA_FILES}"  ] && continue 
      mkdir -p ${dataset_dir}
      cd ${dataset_dir}
@@ -70,9 +72,9 @@ do
      [ -n "${OLD_FASTAS}" ] && mv *.fa temp
      for fasta_file in ${FASTA_FILES}
      do
-        if [ -f $organism_dir/$fasta_file ]
+        if [ -f ${organism_dataset_base}/$fasta_file ]
         then
-              cp -p ${organism_dir}/${fasta_file} .
+              cp -p ${organism_dataset_base}/${fasta_file} .
               ${GUNZIP} ${fasta_file}
         fi
      done
