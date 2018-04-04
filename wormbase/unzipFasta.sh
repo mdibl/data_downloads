@@ -11,68 +11,46 @@
 #
 # Example under  /data/scratch/wormbase-WS261/
 # c_elegans.PRJNA13758-genomic 
-
+# This script is called by the download manager script.
+# Assumption: all the expected environment variables have been
+# sourced by the caller.
+#
 cd `dirname $0`
-
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
-RELEASE_NUMBER=0
+
+PACKAGE_CONFIG=`basename ${PACKAGE_CONFIG_FILE}`
+if [ ! -f ${PACKAGE_CONFIG} ]
+then
+    echo "ERROR: global environment PACKAGE_CONFIG_FILE missing from `pwd` " 
+    exit 1
+fi
+if [ ! -f ${RELEASE_FILE} ]
+then
+   echo "Missing release flag file: ${RELEASE_FILE}"
+   exit 1
+fi
+RELEASE_NUMBER=`cat ${RELEASE_FILE} | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
+
+source ./${PACKAGE_CONFIG}
+
 export PACKAGE_CONFIG_FILE PACKAGE_DOWNLOADS_BASE RELEASE_FILE DOWNLOADS_LOG_DIR MAIN_DOWNLOAD_SCRIPT
-if [ $# -lt 1 ]
-then 
-  echo "****************************************"
-  echo ""
-  echo "Usage: ./$SCRIPT_NAME path2/source_config.cfg"
-  echo "Example: ./$SCRIPT_NAME wormbase/wormbase.cfg"
-  echo "Where the source config path is relative to this script base"
-  echo ""
-  echo "****************************************"
-  exit 1
-fi
-if [ ! -f $1 ]
-then
-  echo "ERROR: $1 config file missing from `pwd`"
-fi
+SCRATCH_DIR="$SCRATCH_DATA_BASE/$SHORT_NAME-$RELEASE_NUMBER"
 
-source ./Configuration
-source ./$1
-RELEASE_BASE=$EXTERNAL_DATA_BASE/$SHORT_NAME
-SCRATCH_DIR=""
-DATA_DIR=""
-
-if [ -f $RELEASE_BASE/current_release_NUMBER ]
-then
-    RELEASE_NUMBER=`cat $RELEASE_BASE/current_release_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
-    SCRATCH_DIR="$SCRATCH_DATA_BASE/$SHORT_NAME-$RELEASE_NUMBER"
-    DATA_DIR="$RELEASE_BASE/current/species"
-    if [ ! -d $SCRATCH_DIR ]
-    then
-        mkdir -p $SCRATCH_DIR
-    fi
-fi 
-
+PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR}/species"
 if [ ! -d $SCRATCH_DIR ]
 then
-  echo "Failed to create $SCRATCH_DIR "
-  exit 1
+    mkdir -p $SCRATCH_DIR
 fi
-LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.$RELEASE_NUMBER.
-rm -f $LOG
-touch $LOG
-
-date | tee -a $LOG
-
 cd $SCRATCH_DIR
-
 for organism in $TAXA
 do
-  organism_dir=$DATA_DIR/$organism
+  organism_dir=$PACKAGE_BASE/$organism
   if [ ! -d $organism_dir ]
   then
      echo "ERROR: Missing directory $organism_dir"
      exit 1
   fi
-  echo ""
   echo "===== $organism ====="
   for project in $PROJECTS
   do
@@ -83,34 +61,35 @@ do
         FASTA_FILES=`ls $organism_dir | grep $project | grep $dataset |grep gz`
         ## Next if this project does not include this dataset
         [ -z "${FASTA_FILES}"  ] && continue 
-
         mkdir -p $dataset_dir
         cd $dataset_dir
-        echo "Unzipping $organism_dir/$project*.$dataset dataset under $dataset_dir" | tee -a $LOG
+        echo "Unzipping $organism_dir/$project*.$dataset dataset under $dataset_dir" 
         [ ! -d temp ] && mkdir temp
         OLD_FASTAS=`ls | grep .fa`
         [ -n "${OLD_FASTAS}" ] && mv *.fa temp
-
         for fasta_file in $FASTA_FILES
         do
            if [ -f $organism_dir/$fasta_file ]
            then
-               echo "$fasta_file" | tee -a $LOG
+               echo "$fasta_file" 
                cp -p $organism_dir/$fasta_file .
                gunzip $fasta_file
            fi
         done
         rm -rf temp 
       done
-     ## Create the joined transcriptome - for c_elegans.PRJNA13758 project only
+     ## Create the joined transcriptome 
      #
-     if [ "$project" = "c_elegans.PRJNA13758" ]
+     if [ -d $SCRATCH_DIR/$project-mRNA_transcripts ]
      then
-        joined_dir=$SCRATCH_DIR/$project-transcriptome_joined
-        [ ! -d $joined_dir ] && mkdir $joined_dir
-        joined_file=$joined_dir/$project-joined.fa
-        cat $SCRATCH_DIR/$project-mRNA_transcripts/*.mRNA_transcripts.fa $SCRATCH_DIR/$project-ncRNA_transcripts/*.ncRNA_transcripts.fa > $joined_file
-     fi
+         if [ -d $SCRATCH_DIR/$project-ncRNA_transcripts ]
+         then
+             joined_dir=$SCRATCH_DIR/$project-transcriptome_joined
+             [ ! -d $joined_dir ] && mkdir $joined_dir
+             joined_file=$joined_dir/$project-joined.fa
+             cat $SCRATCH_DIR/$project-mRNA_transcripts/*.mRNA_transcripts.fa $SCRATCH_DIR/$project-ncRNA_transcripts/*.ncRNA_transcripts.fa > $joined_file
+          fi
+    fi
   done
 done
 
