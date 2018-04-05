@@ -65,10 +65,33 @@ then
   exit 1
 fi
 source ./${GLOBAL_CONFIG}
+## Checks logs for failure 
+function getLogStatus() {
+  log=$1
+  IFS=""
+  rstatus="Success"
+  for ((i = 0; i < ${#ERROR_TERMS[@]}; i++))
+  do
+       error_term=${ERROR_TERMS[$i]}
+       error_found=`grep -i $error_term $log `
+       if [ "$error_found" != "" ]
+       then
+            rstatus="Failure"
+            echo "Found: \"$error_found\" "   
+        fi
+  done
+  echo "$rstatus" 
+}
 
 PACKAGE_DOWNLOADS_BASE=${EXTERNAL_DATA_BASE}/${SOURCE_NAME}
 PACKAGE_CONFIG_FILE=${SOURCE_NAME}/${SOURCE_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
 LOCAL_DOWNLOAD_SCRIPT=${SOURCE_NAME}/${DOWNLOAD_SCRIPT}
+LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.${SOURCE_NAME}.log
+rm -f ${LOG}
+touch ${LOG}
+echo "==" | tee -a ${LOG}
+echo "Start Date:"`date` | tee -a ${LOG}
+
 if [ ! -f ${PACKAGE_CONFIG_FILE} ]
 then
   echo "${SOURCE_NAME}'S confifiguration file: '${PACKAGE_CONFIG_FILE}' missing under `pwd`" 
@@ -78,7 +101,12 @@ if [ ! -f ${LOCAL_DOWNLOAD_SCRIPT} ]
 then
      #We use the generic download script for this source downloads
      export PACKAGE_CONFIG_FILE PACKAGE_DOWNLOADS_BASE DOWNLOADS_LOG_DIR
-     ./${DOWNLOAD_SCRIPT}
+     ./${DOWNLOAD_SCRIPT}  2>&1 | tee -a ${LOG}
+     echo "== " | tee -a ${LOG}
+     echo "Sanity Check on : ${LOG}" | tee -a 
+     download_status=`getLogStatus ${LOG}`
+     echo "${download_status}" | tee -a $LOG
+     [ "${download_status}" != Success ] && exit 1
 else 
     ## We use this source's specific download script for data downloads
     ## Update the release flag file
