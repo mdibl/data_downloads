@@ -53,7 +53,7 @@ do
   cd ${DOWNLOAD_DIR}
   REMOTE_FILE=${DATASETS[$dataset]}
   ## Remote path to this dataset files
-  REMOTE_URL=${REMOTE_SITE}$/${REMOTE_FILE}
+  REMOTE_URL=${REMOTE_SITE}/${REMOTE_FILE}
   remote_file=`basename ${REMOTE_URL}`
   if [ "${IS_HTTP_PATTERN}" = true ]
   then
