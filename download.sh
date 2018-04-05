@@ -17,10 +17,9 @@ DATE=`date +"%B %d %Y"`
 DATE=`echo $DATE | sed -e 's/[[:space:]]/-/g'`
 WGET=`which wget`
 
-PACKAGE_CONFIG=`basename ${PACKAGE_CONFIG_FILE}`
 if [ ! -f ${PACKAGE_CONFIG_FILE} ]
 then
-    echo "ERROR: global environment ${PACKAGE_CONFIG_FILE} missing from `pwd` " 
+    echo "ERROR: global environment PACKAGE_CONFIG_FILE not set " 
     exit 1
 fi
 source ./${PACKAGE_CONFIG_FILE}
@@ -28,6 +27,7 @@ source ./${PACKAGE_CONFIG_FILE}
 PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}
 
 LOG=${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${SHORT_NAME}.log
+
 rm -f ${LOG}
 touch ${LOG}
 if [ "${DOWNLOADS_LOG_DIR}" = "" ]
