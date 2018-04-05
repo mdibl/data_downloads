@@ -51,16 +51,18 @@ do
   DOWNLOAD_DIR=${PACKAGE_BASE}/${dataset}
   mkdir -p ${DOWNLOAD_DIR}
   cd ${DOWNLOAD_DIR}
-  REMOTE_FILE=${DATASETS[$dataset]}
-  ## Remote path to this dataset files
-  REMOTE_URL=${REMOTE_SITE}/${REMOTE_FILE}
-  remote_file=`basename ${REMOTE_URL}`
-  if [ "${IS_HTTP_PATTERN}" = true ]
-  then
-      ${WGET} ${WGET_OPTIONS} -A ${remote_file} "${REMOTE_URL}/" 
-  else
-      ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 
-  fi 
+  REMOTE_FILES=${DATASETS[$dataset]}
+  for REMOTE_FILE in ${REMOTE_FILES}
+      ## Remote path to this dataset files
+      REMOTE_URL=${REMOTE_SITE}/${REMOTE_FILE}
+      remote_file=`basename ${REMOTE_URL}`
+      if [ "${IS_HTTP_PATTERN}" = true ]
+      then
+          ${WGET} ${WGET_OPTIONS} -A ${remote_file} "${REMOTE_URL}/" 
+      else
+          ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 
+      fi 
+  done
 done
 )
 echo "End Date:`date`" | tee -a ${LOG}  
