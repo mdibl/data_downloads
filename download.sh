@@ -53,6 +53,7 @@ do
   cd ${DOWNLOAD_DIR}
   REMOTE_FILES=${DATASETS[$dataset]}
   for REMOTE_FILE in ${REMOTE_FILES}
+  do
       ## Remote path to this dataset files
       REMOTE_URL=${REMOTE_SITE}/${REMOTE_FILE}
       remote_file=`basename ${REMOTE_URL}`
