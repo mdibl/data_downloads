@@ -138,8 +138,3 @@ else
      echo "Running cmd: ./${GET_PACKAGE_MAIN_SCRIPT} ${SOURCE_NAME}  -- from `pwd`"
      ./${GET_PACKAGE_MAIN_SCRIPT} ${SOURCE_NAME}
 fi
-if [ $? -ne 0 ]
-then
-    echo "Cmd Status: FAILED"
-    exit 1
-fi
