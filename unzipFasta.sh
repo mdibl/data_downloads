@@ -89,7 +89,7 @@ do
           joined_dir=${SCRATCH_DIR}/${organism}-transcriptome_joined
           [ ! -d ${joined_dir} ] && mkdir ${joined_dir}
           joined_file=${joined_dir}/${organism}-transcriptome-joined.fa
-          cat ${SCRATCH_DIR}/${organism}-${MRNA_TR}/*.${MRNA_TR}.fa ${SCRATCH_DIR}/${organism}-${NCRNA_TR}/*.${NCRNA_TR}.fa > $joined_file
+          cat ${SCRATCH_DIR}/${organism}-${MRNA_TR}/*.${MRNA_TR}.fa ${SCRATCH_DIR}/${organism}-${NCRNA_TR}/*.${NCRNA_TR}.fa >$joined_file
       fi
   fi
   #Create the mega file if this is dna dataset
@@ -98,7 +98,7 @@ do
        genome_dir=${SCRATCH_DIR}/${organism}-genome
        [ ! -d ${genome_dir} ] && mkdir ${genome_dir}
        genome_file=${genome_dir}/${organism}.genome.fa
-       [ ! -f ${genome_file} ] && cat ${SCRATCH_DIR}/${organism}-${CHROMOSOMES_DATASET}/${CHROMOSOMES} > ${genome_file }
+       [ ! -f ${genome_file} ] && cat ${SCRATCH_DIR}/${organism}-${CHROMOSOMES_DATASET}/${CHROMOSOMES} > ${genome_file}
   fi
 done
 
