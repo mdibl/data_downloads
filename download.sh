@@ -25,6 +25,7 @@ fi
 source ./${PACKAGE_CONFIG_FILE}
 
 PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}
+[ "${HAS_RELEASE}" = true] && PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR}
 
 LOG=${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${SHORT_NAME}.log
 
@@ -43,7 +44,10 @@ echo "==" | tee -a ${LOG}
 echo "Local directory: ${PACKAGE_BASE}" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 [ ! -d ${PACKAGE_BASE} ] && mkdir --parents ${PACKAGE_BASE}
-
+echo "-------------------------------------"
+echo "Using Wget to Download datasets"| tee -a ${LOG}
+echo ""
+echo ">>>>>>>> Wget output starts here " | tee -a ${LOG}
 (
 set -f
 for dataset in "${!DATASETS[@]}"
@@ -59,9 +63,9 @@ do
       remote_file=`basename ${REMOTE_URL}`
       if [ "${IS_HTTP_PATTERN}" = true ]
       then
-          ${WGET} ${WGET_OPTIONS} -A ${remote_file} "${REMOTE_URL}/" 
+          ${WGET} ${WGET_OPTIONS} -A ${remote_file} "${REMOTE_URL}/"  2>&1 | tee -a ${LOG}
       else
-          ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 
+          ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL}  2>&1 | tee -a ${LOG}
       fi 
   done
 done
