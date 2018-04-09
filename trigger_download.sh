@@ -106,9 +106,9 @@ fi
 
 export PACKAGE_CONFIG_FILE PACKAGE_DOWNLOADS_BASE DOWNLOADS_LOG_DIR GLOBAL_CONFIG RELEASE_FILE
 
-if [ ! -f ${LOCAL_DOWNLOAD_SCRIPT} ]
+if [ "${HAS_RELEASE}" !=true ]
 then
-     #We use the generic download script for this source downloads
+     #No release info: Datasets not stored by release for this source
      download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.log
      ./${DOWNLOAD_SCRIPT}  2>&1 | tee -a ${LOG}
      echo "== " | tee -a ${LOG}
@@ -117,8 +117,7 @@ then
      echo "${download_status}" | tee -a $LOG
      [ "${download_status}" != Success ] && exit 1
 else 
-    ## We use this source's specific download script for data downloads
-    ## Update the release flag file
+    ## We will first get/set the release info before running the download script
     if [ $# -lt 2 ]
     then 
         echo "Running cmd: ./${GET_SOURCE_VERSION_SCRIPT} ${SOURCE_NAME}  -- from `pwd`"
