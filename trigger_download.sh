@@ -145,6 +145,7 @@ then
      [ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ] && exit 1
      download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.${RELEASE_DIR}.log
      export PACKAGE_CONFIG_FILE PACKAGE_DOWNLOADS_BASE DOWNLOADS_LOG_DIR GLOBAL_CONFIG RELEASE_FILE
+     export RELEASE_NUMBER RELEASE_DIR
      if [ -f ${LOCAL_DOWNLOAD_SCRIPT} ]
      then
            ## Run THIS SOURCE'S download script to get the version  found in current_release file 
