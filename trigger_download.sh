@@ -86,11 +86,13 @@ function getLogStatus() {
 PACKAGE_DOWNLOADS_BASE=${EXTERNAL_DATA_BASE}/${SOURCE_NAME}
 PACKAGE_CONFIG_FILE=${SOURCE_NAME}/${SOURCE_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
 LOCAL_DOWNLOAD_SCRIPT=${SOURCE_NAME}/${DOWNLOAD_SCRIPT}
+
 LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.${SOURCE_NAME}.log
+
 RELEASE_FILE=${PACKAGE_DOWNLOADS_BASE}/${CURRENT_FLAG_FILE}
 RELEASE_NUMBER=""
 [ -f ${RELEASE_FILE} ] && RELEASE_NUMBER=`cat ${RELEASE_FILE}`
-
+[ ! -d ${DOWNLOADS_LOG_DIR} ] && mkdir -p ${DOWNLOADS_LOG_DIR}
 rm -f ${LOG}
 touch ${LOG}
 echo "==" | tee -a ${LOG}
@@ -101,14 +103,17 @@ then
   echo "${SOURCE_NAME}'S confifiguration file: '${PACKAGE_CONFIG_FILE}' missing under `pwd`" 
   exit 1
 fi
+
+export PACKAGE_CONFIG_FILE PACKAGE_DOWNLOADS_BASE DOWNLOADS_LOG_DIR GLOBAL_CONFIG RELEASE_FILE
+
 if [ ! -f ${LOCAL_DOWNLOAD_SCRIPT} ]
 then
      #We use the generic download script for this source downloads
-     export PACKAGE_CONFIG_FILE PACKAGE_DOWNLOADS_BASE DOWNLOADS_LOG_DIR
+     download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.log
      ./${DOWNLOAD_SCRIPT}  2>&1 | tee -a ${LOG}
      echo "== " | tee -a ${LOG}
-     echo "Sanity Check on : ${LOG}" | tee -a 
-     download_status=`getLogStatus ${LOG}`
+     echo "Sanity Check on : ${LOG}" | tee -a ${LOG}
+     download_status=`getLogStatus ${download_log}`
      echo "${download_status}" | tee -a $LOG
      [ "${download_status}" != Success ] && exit 1
 else 
@@ -137,9 +142,16 @@ else
      #if this version of the tool is already installed, do run run the main install script
      source ./${PACKAGE_CONFIG_FILE}
      [ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ] && exit 1
-     ## Run the main download script to get the version  found in current_release file 
-     echo "Running cmd: ./${GET_PACKAGE_MAIN_SCRIPT} ${SOURCE_NAME}  -- from `pwd`"
-     ./${GET_PACKAGE_MAIN_SCRIPT} ${SOURCE_NAME}
+     download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.${RELEASE_DIR}.log
+     ## Run THIS SOURCE'S download script to get the version  found in current_release file 
+     echo "Running cmd: ./${LOCAL_DOWNLOAD_SCRIPT}  -- from `pwd`"
+     ./${LOCAL_DOWNLOAD_SCRIPT}
+     echo "== " | tee -a ${LOG}
+     echo "Sanity Check on : ${download_log} " | tee -a ${LOG}
+     download_status=`getLogStatus ${download_log}`
+     echo "${download_status}" | tee -a $LOG
+     [ "${download_status}" != Success ] && exit 1
+     
      ## update the symbolic link to point to the lasted download version
      cd ${PACKAGE_DOWNLOADS_BASE}
      rm -f current
