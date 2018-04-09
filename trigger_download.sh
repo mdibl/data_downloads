@@ -87,6 +87,10 @@ PACKAGE_DOWNLOADS_BASE=${EXTERNAL_DATA_BASE}/${SOURCE_NAME}
 PACKAGE_CONFIG_FILE=${SOURCE_NAME}/${SOURCE_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
 LOCAL_DOWNLOAD_SCRIPT=${SOURCE_NAME}/${DOWNLOAD_SCRIPT}
 LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.${SOURCE_NAME}.log
+RELEASE_FILE=${PACKAGE_DOWNLOADS_BASE}/${CURRENT_FLAG_FILE}
+RELEASE_NUMBER=""
+[ -f ${RELEASE_FILE} ] && RELEASE_NUMBER=`cat ${RELEASE_FILE}`
+
 rm -f ${LOG}
 touch ${LOG}
 echo "==" | tee -a ${LOG}
@@ -124,13 +128,11 @@ else
          echo "Cmd Status: FAILED"
          exit 1
      fi
-     RELEASE_FILE=${PACKAGE_DOWNLOADS_BASE}/${CURRENT_FLAG_FILE}
      if [ ! -f ${RELEASE_FILE} ]
      then
         echo "ERROR: ${RELEASE_FILE} file missing"
         exit 1
      fi
-     RELEASE_NUMBER=`cat ${RELEASE_FILE}`
      #if this version of the tool is already installed, do run run the main install script
      source ./${PACKAGE_CONFIG_FILE}
      [ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ] && exit 1
