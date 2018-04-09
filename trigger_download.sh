@@ -104,18 +104,9 @@ then
   exit 1
 fi
 
-if [ "${HAS_RELEASE}" != true ]
+if [ "${HAS_RELEASE}" = true ]
 then
-     #No release info: Datasets not stored by release for this source
-     download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.log
-     export PACKAGE_CONFIG_FILE PACKAGE_DOWNLOADS_BASE DOWNLOADS_LOG_DIR 
-     ./${DOWNLOAD_SCRIPT}  2>&1 | tee -a ${LOG}
-     echo "== " | tee -a ${LOG}
-     echo "Sanity Check on : ${LOG}" | tee -a ${LOG}
-     download_status=`getLogStatus ${download_log}`
-     echo "${download_status}" | tee -a $LOG
-     [ "${download_status}" != Success ] && exit 1
-else 
+     
     ## We will first get/set the release info before running the download script
     if [ $# -lt 2 ]
     then 
@@ -166,5 +157,14 @@ else
      then
        ./${UNZIP_FILES_SCRIPT}
      fi
-   
+else 
+    #No release info: Datasets not stored by release for this source
+     download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.log
+     export PACKAGE_CONFIG_FILE PACKAGE_DOWNLOADS_BASE DOWNLOADS_LOG_DIR 
+     ./${DOWNLOAD_SCRIPT}  2>&1 | tee -a ${LOG}
+     echo "== " | tee -a ${LOG}
+     echo "Sanity Check on : ${LOG}" | tee -a ${LOG}
+     download_status=`getLogStatus ${download_log}`
+     echo "${download_status}" | tee -a $LOG
+     [ "${download_status}" != Success ] && exit 1
 fi
