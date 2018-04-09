@@ -160,6 +160,7 @@ then
 else 
     #No release info: Datasets not stored by release for this source
      download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.log
+     echo "Running ./${DOWNLOAD_SCRIPT} from `pwd`"
      export PACKAGE_CONFIG_FILE PACKAGE_DOWNLOADS_BASE DOWNLOADS_LOG_DIR 
      ./${DOWNLOAD_SCRIPT}  2>&1 | tee -a ${LOG}
      echo "== " | tee -a ${LOG}
