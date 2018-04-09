@@ -51,6 +51,10 @@ echo "==" | tee -a ${LOG}
 echo "Local directory: ${PACKAGE_BASE}" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 [ ! -d ${PACKAGE_BASE} ] && mkdir --parents ${PACKAGE_BASE}
+echo "-------------------------------------"
+echo "Using Wget to Download datasets"| tee -a ${LOG}
+echo ""
+echo ">>>>>>>> Wget output starts here " | tee -a ${LOG}
 (
 set -f
 for taxonomy in ${TAXA}
@@ -60,7 +64,7 @@ do
      cd ${DOWNLOAD_DIR}
      REMOTE_FILE=${SPECIES_DIR}/$taxonomy/*
      REMOTE_URL=${REMOTE_SITE}${REMOTE_DIR}/${REMOTE_FILE}
-     ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 
+     ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 2>&1 | tee -a ${LOG}
 done
 )
 
@@ -77,12 +81,14 @@ do
     remote_file=`basename ${REMOTE_URL}`
     if [ "${IS_HTTP_PATTERN}" = true ]
     then
-         ${WGET} ${WGET_OPTIONS} -A ${remote_file} "${REMOTE_URL}/"  
+         ${WGET} ${WGET_OPTIONS} -A ${remote_file} "${REMOTE_URL}/"  2>&1 | tee -a ${LOG}
     else
-         ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 
+         ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 2>&1 | tee -a ${LOG}
     fi 
 done
 )
+echo "<<<<<<<< Wget output ends here " | tee -a ${LOG}
+echo ""
 echo "End Date:`date`" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 echo ""
