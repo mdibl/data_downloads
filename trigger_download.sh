@@ -104,7 +104,7 @@ then
   exit 1
 fi
 
-if [ "${HAS_RELEASE}" !=true ]
+if [ "${HAS_RELEASE}" != true ]
 then
      #No release info: Datasets not stored by release for this source
      download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.log
@@ -166,4 +166,5 @@ else
      then
        ./${UNZIP_FILES_SCRIPT}
      fi
+   
 fi
