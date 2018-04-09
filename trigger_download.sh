@@ -103,6 +103,7 @@ then
   echo "${SOURCE_NAME}'S confifiguration file: '${PACKAGE_CONFIG_FILE}' missing under `pwd`" 
   exit 1
 fi
+./${PACKAGE_CONFIG_FILE}
 
 if [ "${HAS_RELEASE}" = true ]
 then
