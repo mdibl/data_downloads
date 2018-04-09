@@ -22,6 +22,9 @@ then
     echo "ERROR: global environment PACKAGE_CONFIG_FILE not set " 
     exit 1
 fi
+RELEASE_NUMBER=""
+[ -f ${RELEASE_FILE} ] && RELEASE_NUMBER=`cat ${RELEASE_FILE}`
+
 source ./${PACKAGE_CONFIG_FILE}
 
 PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}
