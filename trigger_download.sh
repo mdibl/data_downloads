@@ -142,7 +142,7 @@ else
      source ./${PACKAGE_CONFIG_FILE}
      [ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ] && exit 1
      download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.${RELEASE_DIR}.log
-     if [ ! -f ${LOCAL_DOWNLOAD_SCRIPT} ]
+     if [ -f ${LOCAL_DOWNLOAD_SCRIPT} ]
      then
            ## Run THIS SOURCE'S download script to get the version  found in current_release file 
            echo "Running cmd: ./${LOCAL_DOWNLOAD_SCRIPT}  -- from `pwd`"
