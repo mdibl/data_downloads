@@ -105,7 +105,7 @@ then
 fi
 ./${PACKAGE_CONFIG_FILE}
 
-if [ "${HAS_RELEASE}" = true ]
+if [ "${HAS_RELEASE}" == true ]
 then
      
     ## We will first get/set the release info before running the download script
