@@ -103,9 +103,10 @@ then
   echo "${SOURCE_NAME}'S confifiguration file: '${PACKAGE_CONFIG_FILE}' missing under `pwd`" 
   exit 1
 fi
-./${PACKAGE_CONFIG_FILE}
 
-if [ ! -f ${LOCAL_DOWNLOAD_SCRIPT} ]
+source ./${PACKAGE_CONFIG_FILE}
+
+if [ "${HAS_RELEASE}" != true ]
 then
     #No release info: Datasets not stored by release for this source
      download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.log
