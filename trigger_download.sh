@@ -104,12 +104,11 @@ then
   exit 1
 fi
 
-export PACKAGE_CONFIG_FILE PACKAGE_DOWNLOADS_BASE DOWNLOADS_LOG_DIR GLOBAL_CONFIG RELEASE_FILE
-
 if [ "${HAS_RELEASE}" !=true ]
 then
      #No release info: Datasets not stored by release for this source
      download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.log
+     export PACKAGE_CONFIG_FILE PACKAGE_DOWNLOADS_BASE DOWNLOADS_LOG_DIR 
      ./${DOWNLOAD_SCRIPT}  2>&1 | tee -a ${LOG}
      echo "== " | tee -a ${LOG}
      echo "Sanity Check on : ${LOG}" | tee -a ${LOG}
@@ -142,6 +141,7 @@ else
      source ./${PACKAGE_CONFIG_FILE}
      [ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ] && exit 1
      download_log=${DOWNLOADS_LOG_DIR}/${DOWNLOAD_SCRIPT}.${SOURCE_NAME}.${RELEASE_DIR}.log
+     export PACKAGE_CONFIG_FILE PACKAGE_DOWNLOADS_BASE DOWNLOADS_LOG_DIR GLOBAL_CONFIG RELEASE_FILE
      if [ -f ${LOCAL_DOWNLOAD_SCRIPT} ]
      then
            ## Run THIS SOURCE'S download script to get the version  found in current_release file 
