@@ -140,4 +140,13 @@ else
      ## Run the main download script to get the version  found in current_release file 
      echo "Running cmd: ./${GET_PACKAGE_MAIN_SCRIPT} ${SOURCE_NAME}  -- from `pwd`"
      ./${GET_PACKAGE_MAIN_SCRIPT} ${SOURCE_NAME}
+     ## update the symbolic link to point to the lasted download version
+     cd ${PACKAGE_DOWNLOADS_BASE}
+     rm -f current
+     ln -s ${RELEASE_DIR} current
+     cd ${WORKING_DIR}
+     if [ "${UNZIP_FILES}" == true ]
+     then
+       ./${UNZIP_FILES_SCRIPT}
+     fi
 fi
