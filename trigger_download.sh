@@ -133,6 +133,7 @@ else
         echo "ERROR: ${RELEASE_FILE} file missing"
         exit 1
      fi
+     RELEASE_NUMBER=`cat ${RELEASE_FILE}`
      #if this version of the tool is already installed, do run run the main install script
      source ./${PACKAGE_CONFIG_FILE}
      [ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ] && exit 1
