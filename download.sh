@@ -22,20 +22,17 @@ then
     echo "ERROR: global environment PACKAGE_CONFIG_FILE not set " 
     exit 1
 fi
-echo "Sourcing Package: ${PACKAGE_CONFIG_FILE}"  
 RELEASE_NUMBER=""
 if [ -f ${RELEASE_FILE} ]
 then 
    RELEASE_NUMBER=`cat ${RELEASE_FILE}`
 fi
-echo "Sourcing Package: ${PACKAGE_CONFIG_FILE}"  
-
 source ./${PACKAGE_CONFIG_FILE}
 
 PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}
 LOG=${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${SHORT_NAME}.log
 
-if [ "${HAS_RELEASE}" = true]
+if [ "${HAS_RELEASE}" == true]
 then
     PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR}
     LOG=${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${SHORT_NAME}.${RELEASE_DIR}.log
