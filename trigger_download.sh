@@ -161,6 +161,12 @@ then
      echo "${download_status}" | tee -a $LOG
      [ "${download_status}" != Success ] && exit 1
      
+     ## Unzip files if needed
+     cd ${WORKING_DIR}
+     if [ "${UNZIP_FILES}" == true ]
+     then
+       ./${UNZIP_FILES_SCRIPT}
+     fi
      ## update the symbolic link to point to the lasted download version
      ## First reset the release flag to the latest version 
      echo "Running cmd: ./${GET_SOURCE_VERSION_SCRIPT} ${SOURCE_NAME}  -- from `pwd`"
@@ -172,10 +178,5 @@ then
          cd ${PACKAGE_DOWNLOADS_BASE}
          rm -f current
          ln -s ${RELEASE_DIR} current
-     fi
-     cd ${WORKING_DIR}
-     if [ "${UNZIP_FILES}" == true ]
-     then
-       ./${UNZIP_FILES_SCRIPT}
      fi
 fi
