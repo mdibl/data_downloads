@@ -4,7 +4,7 @@
 # Author: Lucie Hutchins
 # Date:  April 2018
 #
-# Wrapper script to call getSourceVersion.sh/setSourceVersion.sh and runGetDataset.sh scripts
+# Wrapper script to call getSourceVersion.sh/setSourceVersion.sh and download.sh scripts
 # To download the current version of the Data source.
 # If a second argument is specified, then it's used as the version
 # to download
