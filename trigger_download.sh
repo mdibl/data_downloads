@@ -32,8 +32,6 @@ function displayDataSources() {
     done
     echo ""
 }
-
-
 if [ $# -lt 1 ]
 then
   echo "***********************************************"
@@ -167,16 +165,19 @@ then
      then
        ./${UNZIP_FILES_SCRIPT}
      fi
-     ## update the symbolic link to point to the lasted download version
-     ## First reset the release flag to the latest version 
-     echo "Running cmd: ./${GET_SOURCE_VERSION_SCRIPT} ${SOURCE_NAME}  -- from `pwd`"
-     cd ${WORKING_DIR}
-     ./${GET_SOURCE_VERSION_SCRIPT} ${SOURCE_NAME}
-     LATEST_RELEASE_NUMBER=`cat ${RELEASE_FILE}`
-     if [ "${RELEASE_NUMBER}" = ${LATEST_RELEASE_NUMBER} ]
+     if [ "${MANNUAL_UPDATE}" != true ]
      then
-         cd ${PACKAGE_DOWNLOADS_BASE}
-         rm -f current
-         ln -s ${RELEASE_DIR} current
+         ## update the symbolic link to point to the lasted download version
+         ## First reset the release flag to the latest version 
+         echo "Running cmd: ./${GET_SOURCE_VERSION_SCRIPT} ${SOURCE_NAME}  -- from `pwd`"
+         cd ${WORKING_DIR}
+         ./${GET_SOURCE_VERSION_SCRIPT} ${SOURCE_NAME}
+         LATEST_RELEASE_NUMBER=`cat ${RELEASE_FILE}`
+         if [ "${RELEASE_NUMBER}" = ${LATEST_RELEASE_NUMBER} ]
+         then
+             cd ${PACKAGE_DOWNLOADS_BASE}
+             rm -f current
+             ln -s ${RELEASE_DIR} current
+         fi
      fi
 fi
