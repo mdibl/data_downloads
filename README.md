@@ -18,7 +18,7 @@ will depend on the way a given data source publishes its data.
 
 ### Non Release-Centric Data Sources
  Under data source root directory, the files will be stored by datasets
- or as specified in variable DATASETS in the data source configuration file 
+ or as specified in variables DATASETS, or/and TAXA in the data source configuration file 
 
 Package Documentation:  https://github.com/mdibl/data_downloads/wiki
 
