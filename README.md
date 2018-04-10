@@ -10,6 +10,9 @@ For each database source, this package can be setup to run an automation that ch
 For each database source,the automation creates a root directory that is the name of the database in the path set in the main Configuration (EXTERNAL_DATA_BASE). The organization of files under these root directories
 will depend on the way a given data source publishes its data.
 
+Some databases generate dataset downloads by release (Ensembl, Wormbase, ...) 
+and some do not (MGI, NCBI, ...).
+
 ### Release-Centric Data Sources
  Under data source root directory, you will find:
   * A file (current_release_NUMBER) that stores the latest release of the data source
