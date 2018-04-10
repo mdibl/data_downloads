@@ -47,7 +47,6 @@ echo "==" | tee -a ${LOG}
 echo "Start Date:"`date` | tee -a ${LOG}  
 echo "Package: ${SHORT_NAME} - ${RELEASE_DIR}"  | tee -a ${LOG}  
 echo "Remote site: ${REMOTE_SITE}"  | tee -a ${LOG}  
-echo "==" | tee -a ${LOG}  
 echo "Local directory: ${PACKAGE_BASE}" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 [ ! -d ${PACKAGE_BASE} ] && mkdir --parents ${PACKAGE_BASE}
