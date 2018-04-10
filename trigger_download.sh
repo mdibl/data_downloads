@@ -162,9 +162,17 @@ then
      [ "${download_status}" != Success ] && exit 1
      
      ## update the symbolic link to point to the lasted download version
-     cd ${PACKAGE_DOWNLOADS_BASE}
-     rm -f current
-     ln -s ${RELEASE_DIR} current
+     ## First reset the release flag to the latest version 
+     echo "Running cmd: ./${GET_SOURCE_VERSION_SCRIPT} ${SOURCE_NAME}  -- from `pwd`"
+     cd ${WORKING_DIR}
+     ./${GET_SOURCE_VERSION_SCRIPT} ${SOURCE_NAME}
+     LATEST_RELEASE_NUMBER=`cat ${RELEASE_FILE}`
+     if [ "${RELEASE_NUMBER}" = ${LATEST_RELEASE_NUMBER} ]
+     then
+         cd ${PACKAGE_DOWNLOADS_BASE}
+         rm -f current
+         ln -s ${RELEASE_DIR} current
+     fi
      cd ${WORKING_DIR}
      if [ "${UNZIP_FILES}" == true ]
      then
