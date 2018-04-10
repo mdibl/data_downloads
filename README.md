@@ -1,5 +1,5 @@
 
-# Biocore Package Downloads Repos
+# Biocore Data Downloads Repos
 
 A repository to create automations that download external bioinformatics Datasets.
 
