@@ -8,7 +8,7 @@ For each database source, this package can be setup to run an automation that ch
 ## What It Does
 
 For each database source,the automation creates a root directory that is the name of the database in the path set in the main Configuration (EXTERNAL_DATA_BASE). The organization of files under these root directories
-will depend on the way a given data source published its data.
+will depend on the way a given data source publishes its data.
 
 ### Release-Centric Data Sources
  Under data source root directory, you will find:
