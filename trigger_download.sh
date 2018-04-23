@@ -116,6 +116,7 @@ then
      download_status=`getLogStatus ${download_log}`
      echo "${download_status}" | tee -a $LOG
     [ "${download_status}" != Success ] && exit 1
+    exit 0
  else 
     ## We will first get/set the release info before running the download script
     if [ $# -lt 2 ]
@@ -181,3 +182,4 @@ then
          fi
      fi
 fi
+exit 0
