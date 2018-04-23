@@ -140,7 +140,7 @@ then
     echo "WARNING"
     echo "  ${SOURCE_NAME} version $RELEASE_NUMBER is already installed."
     echo "  See: ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} "
-    echo "  Remove this directory first if you want to re-downlaod this version"
+    echo "  Remove this directory first if you want to re-download this version"
 fi
 echo ""| tee -a ${LOG_FILE}
 echo "Program complete"| tee -a ${LOG_FILE}
