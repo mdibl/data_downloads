@@ -12,8 +12,9 @@ Base directory to store Orthodb downloads scripts and config files
   
 ## OrthoDB downloads frequency
 
-Since it's not easy task to programatically get the release information, 
-we will thes the updates to run on demand - with the release info being
+Since it's not easy task to programatically get the release information of this data source
+from their download site, 
+we will set the updates to run on demand - with the release info being
 passed to the downloader script as an argument.
 
 ```
