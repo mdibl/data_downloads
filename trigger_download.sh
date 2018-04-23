@@ -115,7 +115,7 @@ then
      echo "Sanity Check on : ${LOG}" | tee -a ${LOG}
      download_status=`getLogStatus ${download_log}`
      echo "${download_status}" | tee -a $LOG
-     [ "${download_status}" != Success ] && exit 1
+     [ "${download_status}" != "Success" ] && exit 1
  else 
     ## We will first get/set the release info before running the download script
     if [ $# -lt 2 ]
