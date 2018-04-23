@@ -28,6 +28,6 @@ Base directory to store NCBI downloads scripts and config files
 Genes and taxonomy files are updated daily so, we have scheduled our downloads to run daily.
 
   
-Runs daily: 9:30AM
+Runs daily: 4PM
 
 See: https://jenkins.mdibl.org/job/ncbi/
