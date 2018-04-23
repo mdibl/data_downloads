@@ -12,6 +12,6 @@ Base directory to store Gene Onthology downloads scripts and config files
 ## GO downloads frequency
 Termdb is updated daily so, we have scheduled our downloads to run daily.
 
-Runs daily : 11:24AM
+Runs daily :19:00PM
 
 See: https://jenkins.mdibl.org/job/GO/
