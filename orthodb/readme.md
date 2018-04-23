@@ -12,9 +12,15 @@ Base directory to store Orthodb downloads scripts and config files
   
 ## OrthoDB downloads frequency
 
-We have scheduled our downloads to run weekly.
+Since it's not easy task to programatically get the release information, 
+we will thes the updates to run on demand - with the release info being
+passed to the downloader script as an argument.
 
-  
-Runs Mondays: 10:00AM
+```
+Usage: ./${DATA_DOWNLOADS_DIR}/trigger_download.sh orthodb version_numebr
 
+Example: ./${DATA_DOWNLOADS_DIR}/trigger_download.sh orthodb v9.1
+
+
+```
 See: https://jenkins.mdibl.org/job/Orthodb/
