@@ -1,11 +1,11 @@
 
-# What Do We Download From BioGRID -  https://downloads.thebiogrid.org/3.4.160/?
+## What Do We Download From BioGRID -  https://downloads.thebiogrid.org?
 
-## Annotations : /BioGRID/Release-Archive/BIOGRID-$RELEASE_NUMBER
+### Annotations : /BioGRID/Release-Archive/BIOGRID-$RELEASE_NUMBER
   * BIOGRID-ALL-3.4.160.tab2.zip
  
   
-## BioGRID downloads frequency
+### BioGRID downloads frequency
 
 Since it's not easy task to programatically get the release information of this data source
 from their download site, 
