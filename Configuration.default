@@ -10,9 +10,9 @@
 #  be sotered somewhere else than EXTERNAL_DATA_BASE,
 #  then change the following base directories as needed
 #
-EXTERNAL_DATA_BASE=/data/external
-SCRATCH_DATA_BASE=/data/scratch
-LOGS_BASE=/data/logs
+EXTERNAL_DATA_BASE=/mnt/data/external
+SCRATCH_DATA_BASE=/mnt/scratch
+LOGS_BASE=/mnt/data/logs
 WORKING_DIR=`pwd`
 
 DATA_DOWNLOADS_BASE=`realpath $WORKING_DIR`
