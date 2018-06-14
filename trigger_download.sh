@@ -162,7 +162,7 @@ then
      
      ## Unzip files if needed
      cd ${WORKING_DIR}
-     if [ "${UNZIP_FILES}" == true ]
+     if [ "${UNZIP_FILES}" = true ]
      then
        ./${UNZIP_FILES_SCRIPT}
      fi
