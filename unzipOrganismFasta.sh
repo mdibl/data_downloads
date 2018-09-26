@@ -63,25 +63,26 @@ do
      dataset_dir=${SCRATCH_DIR}/${organism}-${dataset}
      organism_dataset_base=${organism_dir}
      [ -d ${organism_dir}/${dataset} ] && organism_dataset_base=${organism_dir}/${dataset}
-     FASTA_FILES=`ls ${organism_dataset_base} | grep ${DATASETS_PATTERN[$dataset]} | grep ${ZIP_EXTENSION} `
-     [ -z "${FASTA_FILES}"  ] && continue 
+     TARGET_FILES=`ls ${organism_dataset_base} | grep ${DATASETS_PATTERN[$dataset]} | grep ${ZIP_EXTENSION} `
+     [ -z "${TARGET_FILES}"  ] && continue 
      mkdir -p ${dataset_dir}
      cd ${dataset_dir}
      [ ! -d temp ] && mkdir temp
-     OLD_FASTAS=`ls | grep .fa`
-     [ -n "${OLD_FASTAS}" ] && mv *.fa temp
-     for fasta_file in ${FASTA_FILES}
+     #OLD_FASTAS=`ls | grep .fa`
+     OLD_FILES=`ls | grep ${DATASETS_PATTERN[$dataset]}`
+     [ -n "${OLD_FILES}" ] && mv *${DATASETS_PATTERN[$dataset]}  temp
+     for target_file in ${TARGET_FILES}
      do
-        if [ -f ${organism_dataset_base}/$fasta_file ]
+        if [ -f ${organism_dataset_base}/$target_file ]
         then
-              cp -p ${organism_dataset_base}/${fasta_file} .
-              ${GUNZIP} ${fasta_file}
+              cp -p ${organism_dataset_base}/${target_file} .
+              ${GUNZIP} ${target_file}
         fi
      done
      rm -rf temp  
   done
   ## Create the joined transcriptome by combining 
-  # mRNA and ncRNA transcripts
+  ## mRNA and ncRNA transcripts
   if [ -d ${SCRATCH_DIR}/${organism}-${MRNA_TR} ]
   then
       if [ -d ${SCRATCH_DIR}/${organism}-${NCRNA_TR} ]
@@ -100,6 +101,8 @@ do
        genome_file=${genome_dir}/${organism}.genome.fa
        [ ! -f ${genome_file} ] && cat ${SCRATCH_DIR}/${organism}-${CHROMOSOMES_DATASET}/${CHROMOSOMES} > ${genome_file}
   fi
+  ## Generate gtf files
+  
 done
 
 echo ""
