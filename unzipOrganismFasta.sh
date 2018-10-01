@@ -19,6 +19,7 @@ cd `dirname $0`
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
 GUNZIP=`which  gunzip`
+PYTHON=`which python`
 
 if [ ! -f ${GLOBAL_CONFIG} ]
 then
@@ -77,6 +78,10 @@ do
         then
               cp -p ${organism_dataset_base}/${target_file} .
               ${GUNZIP} ${target_file}
+              if [ "${dataset}" == gtf ]
+              then
+                  $PYTHON ${WORKING_DIR}/${TX2GENE_SCRIPT} -f ${dataset_dir}/${target_file} -d ${dataset_dir}
+              fi
         fi
      done
      rm -rf temp  
