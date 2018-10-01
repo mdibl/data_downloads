@@ -47,6 +47,7 @@ GLOBAL_CONFIG=Configuration
 GET_SOURCE_VERSION_SCRIPT=getDataSourceVersion.sh
 SET_SOURCE_VERSION_SCRIPT=setDataSourceVersion.sh
 UNZIP_FILES_SCRIPT=unzipOrganismFasta.sh
+TX2GENE_SCRIPT=gen_tx2gene_gtf.py
 
 ## Relative to each bioformatics source base within this package
 PACKAGE_CONFIGFILE_SUFFIX=_package.cfg
