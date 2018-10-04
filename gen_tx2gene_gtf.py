@@ -9,7 +9,7 @@ def prog_usage():
 ***************************************************************************************
     The tool does the following:
     1) Decompress the input gtf file if the input gtf file has *.gtf.gz extension
-    2) Use the input gtf file to generate a *.tx2gene.gtf file - a two-column file
+    2) Use the input gtf file to generate a *.tx2gene.txt file - a two-column file
        mapping transcript to gene association
     3) Generate *.gene_tx_tally.txt 
 
@@ -122,7 +122,7 @@ if __name__== "__main__":
     ## 
     #print working_dir
     try:
-        tx_file_name=tx_file_prefix+".tx2gene.gtf"
+        tx_file_name=tx_file_prefix+".tx2gene.txt"
         tx_tally_file_name=tx_file_prefix+".gene_tx_tally.txt"
         tx_fd=open(join(dest_dir,tx_file_name),'w')
         txt_fd=open(join(dest_dir,tx_tally_file_name),'w')
