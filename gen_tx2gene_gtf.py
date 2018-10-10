@@ -148,7 +148,7 @@ if __name__== "__main__":
         for gene_id,transcripts in genes.items():
            txt_fd.write("%s\t%d\n"%(gene_id,len(transcripts)))
     except:raise
-    print("\n***************************\n\nThe following files where generated:")
+    print("\n***************************\n\nThe following files were generated:")
     print("****************************\nTranscript-Gene mapping:%s"%(join(dest_dir,tx_file_prefix+".tx2gene.gtf")))
     print("Gene Transcript Tally:%s"%(join(dest_dir,tx_file_prefix+".gene_tx_tally.gtf")))
     print("Program Complete")
