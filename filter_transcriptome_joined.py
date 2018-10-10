@@ -8,7 +8,8 @@ def prog_usage():
     usage='''
 ***************************************************************************************
     The tool filters the transcriptome_joined fasta file to remove
-    fasta entries of all the transcripts not in the provided gtf
+    fasta entries of all the transcripts not in the provided gtf.
+    The tool generates a new file with suffix gtf_filtered.fa under the destination directory
     
 ***************************************************************************************
     Usage: PROG [-h] --gtf=path2/gtf_file  --tx=path2/transcriptome.fa --destdir=path2/dest_dir
@@ -23,7 +24,10 @@ def prog_usage():
         python gen_tx2gen_gtf \
            -f /data/scratch/ensembl-94/saccharomyces_cerevisiae-gtf/Saccharomyces_cerevisiae.R64-1-1.89.gtf\
            -t /data/scratch/ensembl-94/saccharomyces_cerevisiae-transcriptome_joined/saccharomyces_cerevisiae-transcriptome-joined.fa
-           -d /data/scratch/ensembl-94/saccharomyces_cerevisiae-transcriptome_joined
+           -d /data/scratch/ensembl-94/saccharomyces_cerevisiae-transcriptome_joined_filtered
+     
+    Output: 
+          path2/dest_dir/*transcriptome-joined.gtf_filtered.fa
           
     '''
     print("%s"%(usage))
