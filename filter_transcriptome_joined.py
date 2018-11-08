@@ -21,8 +21,8 @@ def prog_usage():
    
    
     Example : 
-        python gen_tx2gen_gtf \
-           -f /data/scratch/ensembl-94/saccharomyces_cerevisiae-gtf/Saccharomyces_cerevisiae.R64-1-1.89.gtf\
+        python filter_transcriptome_joined.py \
+           -f /data/scratch/ensembl-94/saccharomyces_cerevisiae-gtf/Saccharomyces_cerevisiae.R64-1-1.94.gtf\
            -t /data/scratch/ensembl-94/saccharomyces_cerevisiae-transcriptome_joined/saccharomyces_cerevisiae-transcriptome-joined.fa
            -d /data/scratch/ensembl-94/saccharomyces_cerevisiae-transcriptome_joined_filtered
      
