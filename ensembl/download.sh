@@ -16,10 +16,11 @@
 #
 cd `dirname $0`
 SCRIPT_NAME=`basename $0`
+SCRIPT_DIR=`pwd`
 DATE=`date +"%B %d %Y"`
 DATE=`echo $DATE | sed -e 's/[[:space:]]/-/g'`
 WGET=`which wget`
-md5sum_prog=`which md5sum`
+md5sum_prog=gen_md5sum.sh
 
 PACKAGE_CONFIG=`basename ${PACKAGE_CONFIG_FILE}`
 if [ ! -f ${PACKAGE_CONFIG} ]
@@ -70,7 +71,6 @@ do
    for dataset in "${!DATASETS[@]}"
    do
        DOWNLOAD_DIR=${PACKAGE_BASE}/${taxonomy}/${dataset}
-       TAXONOMY_BASE=${PACKAGE_BASE}/${taxonomy} 
        mkdir -p ${DOWNLOAD_DIR}
        cd ${DOWNLOAD_DIR}
        
@@ -97,18 +97,14 @@ do
             ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 2>&1 | tee -a ${LOG}
             ${WGET}  ${WGET_OPTIONS} ${README_URL} 2>&1 | tee -a ${LOG}
        fi 
-       #Generate md5sum for this dataset
-       cd $TAXONOMY_BASE
-       if [ -f $md5sum_prog ]
-       then
-           $md5sum_prog $dataset/* > $dataset.md5sum
-       fi
-       
    done 
 done
 )
 echo "<<<<<<<< Wget output ends here " | tee -a ${LOG}
 echo ""
+## generate the md5sum
+cd $SCRIPT_DIR
+./$md5sum_prog ${PACKAGE_BASE}
 echo "End Date:`date`" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 echo ""
