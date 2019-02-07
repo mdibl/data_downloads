@@ -3,7 +3,7 @@
 # Organization: MDIBL
 # Author: Lucie Hutchins
 # Date: September 2017
-# Modified: March 2018
+# Modified: February 2019
 #
 # Wrapper script to download datasets from their download site. 
 # This creates an additional log that could be use later on
@@ -12,11 +12,15 @@
 # Assumption: all the expected environment variables have been
 # sourced by the caller.
 #
+# A md5sum of each dataset is generated after download
+#
 cd `dirname $0`
 SCRIPT_NAME=`basename $0`
+SCRIPT_DIR=`pwd`
 DATE=`date +"%B %d %Y"`
 DATE=`echo $DATE | sed -e 's/[[:space:]]/-/g'`
 WGET=`which wget`
+md5sum_prog=gen_md5sum.sh
 
 PACKAGE_CONFIG=`basename ${PACKAGE_CONFIG_FILE}`
 if [ ! -f ${PACKAGE_CONFIG} ]
@@ -28,6 +32,11 @@ if [ ! -f ${RELEASE_FILE} ]
 then
    echo "Missing release flag file: ${RELEASE_FILE}"
    exit 1
+fi
+if [ ! -f $WGET ]
+then
+  echo "ERROR: wget not installed on `uname -n`"
+  exit 1
 fi
 RELEASE_NUMBER=`cat ${RELEASE_FILE}`
 
@@ -62,7 +71,6 @@ do
    for dataset in "${!DATASETS[@]}"
    do
        DOWNLOAD_DIR=${PACKAGE_BASE}/${taxonomy}/${dataset}
-       
        mkdir -p ${DOWNLOAD_DIR}
        cd ${DOWNLOAD_DIR}
        
@@ -89,13 +97,14 @@ do
             ${WGET}  ${WGET_OPTIONS} ${REMOTE_URL} 2>&1 | tee -a ${LOG}
             ${WGET}  ${WGET_OPTIONS} ${README_URL} 2>&1 | tee -a ${LOG}
        fi 
-      
-       
    done 
 done
 )
 echo "<<<<<<<< Wget output ends here " | tee -a ${LOG}
 echo ""
+## generate the md5sum
+cd $SCRIPT_DIR
+./$md5sum_prog ${PACKAGE_BASE}
 echo "End Date:`date`" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 echo ""
