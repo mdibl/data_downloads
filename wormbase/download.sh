@@ -14,9 +14,11 @@
 #
 cd `dirname $0`
 SCRIPT_NAME=`basename $0`
+SCRIPT_DIR=`pwd`
 DATE=`date +"%B %d %Y"`
 DATE=`echo $DATE | sed -e 's/[[:space:]]/-/g'`
 WGET=`which wget`
+md5sum_prog=gen_md5sum.sh
 
 PACKAGE_CONFIG=`basename ${PACKAGE_CONFIG_FILE}`
 if [ ! -f ${PACKAGE_CONFIG} ]
@@ -28,6 +30,11 @@ if [ ! -f ${RELEASE_FILE} ]
 then
    echo "Missing release flag file: ${RELEASE_FILE}"
    exit 1
+fi
+if [ ! -f $WGET ]
+then
+  echo "ERROR: wget not installed on `uname -n`"
+  exit 1
 fi
 RELEASE_NUMBER=`cat ${RELEASE_FILE}`
 
@@ -88,6 +95,9 @@ done
 )
 echo "<<<<<<<< Wget output ends here " | tee -a ${LOG}
 echo ""
+## generate the md5sum
+cd $SCRIPT_DIR
+./$md5sum_prog ${PACKAGE_BASE}
 echo "End Date:`date`" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 echo ""
