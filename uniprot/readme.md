@@ -1,6 +1,6 @@
 Base directory to store UNIPROTdownloads scripts and config files
 
-# What Do We Download FORM ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/?
+## What are we Downloading from ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/?
 
 ## Documentation
   * reldate.txt  
