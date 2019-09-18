@@ -4,12 +4,14 @@ Base directory to store UNIPROTdownloads scripts and config files
 
 ## Documentation
   * reldate.txt  
+  * README
   * RELEASE.metalink  
 
 ## SWISSPROT
   * uniprot_sprot.dat.gz  
   * uniprot_sprot.fasta.gz 
   * uniprot_sprot.xml.gz
+  * uniprot_sprot_varsplic.fasta.gz 
  
 ## TREMBL ?
   * uniprot_trembl.dat.gz  
