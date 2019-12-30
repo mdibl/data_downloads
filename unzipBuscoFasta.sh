@@ -6,9 +6,9 @@
 #
 # This script unzip the newly downloaded fasta
 # files under the /data/scratch directory.
-# Under /data/scratch , datasets are stored by source-version
+# Under /data/scratch/reference , datasets are stored by source-version
 #
-# Example under  /data/scratch/mgi/
+# Example under  /data/scratch/reference/mgi/
 #
 # This script is called by the download manager script.
 # Assumption: all the expected environment variables have been
@@ -44,7 +44,7 @@ fi
 RELEASE_NUMBER=`cat ${CRELEASE_FILE} | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
 
 source ./${PACKAGE_CONFIG_FILE}
-SCRATCH_DIR=${SCRATCH_DATA_BASE}/${SHORT_NAME}-${RELEASE_NUMBER}
+SCRATCH_DIR=${SCRATCH_DATA_BASE}/${SHORT_NAME}/release-${RELEASE_NUMBER}
 PACKAGE_BASE=${EXTERNAL_DATA_BASE}/${SHORT_NAME}/$RELEASE_DIR
 
 [ ! -d ${SCRATCH_DIR} ] && mkdir -p ${SCRATCH_DIR}

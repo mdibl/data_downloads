@@ -9,7 +9,7 @@
 # Under /data/scratch , datasets are stored by source-version
 # then by organism.project-dataset
 #
-# Example under  /data/scratch/wormbase-WS261/
+# Example under  /data/scratch/reference/wormbase/release-WS261/
 #
 # This script is called by the download manager script.
 # Assumption: all the expected environment variables have been
@@ -46,7 +46,7 @@ RELEASE_NUMBER=`cat ${RELEASE_FILE} | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[
 source ./${GLOBAL_CONFIG}
 source ./${PACKAGE_CONFIG_FILE}
 
-SCRATCH_DIR=${SCRATCH_DATA_BASE}/${SHORT_NAME}-${RELEASE_NUMBER}
+SCRATCH_DIR=${SCRATCH_DATA_BASE}/${SHORT_NAME}/release-${RELEASE_NUMBER}
 PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}/${ORGANISMS_DOWNLOAD_DIR}
 
 [ ! -d ${SCRATCH_DIR} ] && mkdir -p ${SCRATCH_DIR}
